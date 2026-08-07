@@ -1,0 +1,774 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Pajamas design tokens (vendored — no @gitlab/ui runtime) */
+@import "../styles/pajamas/tokens.css";
+@import "../styles/pajamas/tokens.dark.css";
+@import "../styles/pajamas/layout.css";
+@import "../styles/pajamas/components.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-editor-bg: var(--editor-bg);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* ── Pajamas → app semantic bridge ───────────────────────── */
+  --background: var(--gl-background-color-default);
+  --foreground: var(--gl-text-color-default);
+  --card: var(--gl-background-color-section);
+  --card-foreground: var(--gl-text-color-default);
+  --popover: var(--gl-background-color-overlap);
+  --popover-foreground: var(--gl-text-color-default);
+  --primary: var(--gl-button-confirm-primary-background-color-default);
+  --primary-foreground: var(--gl-button-confirm-primary-foreground-color-default);
+  --secondary: var(--gl-background-color-strong);
+  --secondary-foreground: var(--gl-text-color-default);
+  --muted: var(--gl-background-color-strong);
+  --muted-foreground: var(--gl-text-color-subtle);
+  --accent: var(--gl-background-color-strong);
+  --accent-foreground: var(--gl-text-color-default);
+  --destructive: var(--gl-text-color-danger);
+  --border: var(--gl-border-color-default);
+  --input: var(--gl-control-border-color-default);
+  --ring: var(--gl-focus-ring-outer-color);
+  --chart-1: var(--gl-color-blue-500);
+  --chart-2: var(--gl-color-blue-600);
+  --chart-3: var(--gl-color-blue-700);
+  --chart-4: var(--gl-color-blue-800);
+  --chart-5: var(--gl-color-blue-900);
+  --radius: var(--gl-border-radius-default);
+  --sidebar: transparent;
+  --sidebar-foreground: var(--gl-text-color-default);
+  --sidebar-primary: var(--gl-color-blue-500);
+  --sidebar-primary-foreground: var(--gl-color-neutral-0);
+  --sidebar-accent: var(--gl-background-color-strong);
+  --sidebar-accent-foreground: var(--gl-text-color-default);
+  --sidebar-border: var(--gl-border-color-subtle);
+  --sidebar-ring: var(--gl-focus-ring-outer-color);
+
+  /* Writing surface — same as Pajamas default (inside section card) */
+  --editor-bg: var(--gl-background-color-default);
+
+  /* Chat / agent / diff / wikilink semantic tokens live in
+     styles/pajamas/components.css and inherit dark mode from --gl-*. */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+
+/* ── Inline AI — prompt/loading pill ───────────────────────── */
+.inline-ai-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 10px;
+  /* surface/border/shadow from pajamas/components.css */
+  animation: inlineAiIn 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+@keyframes inlineAiIn {
+  from { opacity: 0; transform: translateY(5px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.inline-ai-icon {
+  color: var(--sidebar-primary);
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.inline-ai-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--foreground);
+  caret-color: var(--foreground);
+  min-width: 0;
+}
+
+.inline-ai-input::placeholder {
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+
+.inline-ai-send,
+.inline-ai-dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.1s;
+}
+
+.inline-ai-send {
+  /* colors from pajamas/components.css */
+}
+.inline-ai-send:hover { opacity: 0.82; }
+
+.inline-ai-dismiss {
+  background: transparent;
+  color: var(--muted-foreground);
+}
+.inline-ai-dismiss:hover { background: var(--muted); }
+
+.inline-ai-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+
+.inline-ai-spin {
+  animation: spin 0.8s linear infinite;
+  color: var(--sidebar-primary);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Loading bar variant */
+.inline-ai-bar--loading {
+  cursor: wait;
+}
+
+.inline-ai-loading-prompt {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--muted-foreground);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Diff review card ───────────────────────────────────────── */
+.inline-ai-card {
+  display: flex;
+  flex-direction: column;
+  max-height: 360px;
+  /* surface/border/shadow from pajamas/components.css */
+  overflow: hidden;
+  animation: inlineAiIn 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+/* Scrollable diff lines area */
+.inline-ai-diff-lines {
+  overflow-y: auto;
+  max-height: 300px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.inline-ai-diff-lines::-webkit-scrollbar { width: 4px; }
+.inline-ai-diff-lines::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Individual diff line */
+.diff-line {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+  font-family: var(--font-mono, monospace);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.diff-line-gutter {
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  user-select: none;
+  padding-top: 1px;
+}
+
+.diff-line-text {
+  flex: 1;
+  min-width: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding: 1px 12px 1px 0;
+}
+
+/* Equal lines — muted context */
+.diff-line--equal {
+  color: var(--muted-foreground);
+  opacity: 0.75;
+}
+.diff-line--equal .diff-line-gutter { opacity: 0; }
+
+/* Removed / added lines — colors from pajamas/components.css */
+.diff-line--remove {}
+.diff-line--add {}
+
+/* Action row */
+.inline-ai-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-top: 1px solid var(--border);
+  background: var(--muted);
+}
+
+.inline-ai-card-accept {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  /* colors from pajamas/components.css */
+  border: none;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: background 0.12s;
+}
+
+.inline-ai-card-reject {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  background: transparent;
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+.inline-ai-card-reject:hover { background: var(--background); color: var(--foreground); }
+
+.inline-ai-card-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-left: auto;
+  background: transparent;
+  color: var(--muted-foreground);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.1s, background 0.1s;
+}
+.inline-ai-card-dismiss:hover { opacity: 1; background: var(--accent); }
+
+/* ── Command Center ───────────────────────────────────────────── */
+.cmd-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  /* background from pajamas/components.css */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+}
+
+.cmd-panel {
+  width: 100%;
+  max-width: 580px;
+  /* surface/border/shadow from pajamas/components.css */
+  overflow: hidden;
+}
+
+.cmd-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+.cmd-search-icon {
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.cmd-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--foreground);
+  caret-color: var(--foreground);
+}
+
+.cmd-search-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.cmd-esc-hint {
+  font-size: 10px;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted-foreground);
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.cmd-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+.cmd-results {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.cmd-results::-webkit-scrollbar {
+  width: 4px;
+}
+.cmd-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+.cmd-results::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.cmd-empty {
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.08s ease;
+}
+
+.cmd-item--selected {
+  background: var(--gl-background-color-strong);
+}
+
+.cmd-item--selected .cmd-file-name {
+  color: var(--accent-foreground);
+}
+
+.cmd-file-icon {
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.cmd-item--selected .cmd-file-icon {
+  color: var(--accent-foreground);
+  opacity: 0.7;
+}
+
+.cmd-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cmd-file-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmd-file-dir {
+  font-size: 11.5px;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmd-section-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  padding: 8px 12px 4px;
+}
+
+.cmd-section-loading {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.7;
+}
+
+.cmd-searching-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted-foreground);
+  flex-shrink: 0;
+  animation: cmdPulse 1s ease-in-out infinite;
+}
+
+@keyframes cmdPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.cmd-content-dir {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+
+.cmd-item--selected .cmd-content-dir {
+  color: var(--accent-foreground);
+  opacity: 0.65;
+}
+
+.cmd-content-snippet {
+  font-size: 11.5px;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.cmd-item--selected .cmd-content-snippet {
+  color: var(--accent-foreground);
+  opacity: 0.7;
+}
+
+.cmd-match {
+  color: var(--gl-text-color-link);
+  font-weight: 600;
+}
+
+.cmd-item--selected .cmd-match {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+}
+
+.cmd-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--muted);
+}
+
+.cmd-footer-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+
+.cmd-footer-hint kbd {
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  background: var(--gl-background-color-strong);
+  border: 1px solid var(--gl-border-color-subtle);
+  border-radius: var(--gl-border-radius-sm);
+  padding: 1px 5px;
+}
+
+.cmd-footer-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--muted-foreground);
+  opacity: 0.6;
+}
+
+@keyframes cmdFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cmdSlideIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Chat-specific styles ───────────────────────────────────── */
+/* Chat-specific styles */
+.chat-user-bubble {
+  background: var(--user-bubble-bg);
+}
+
+.chat-panel {
+  font-family: inherit;
+}
+
+/* ── Wikilinks (CodeMirror) ─────────────────────────────────────── */
+.cm-wikilink {
+  color: var(--wikilink-fg) !important;
+  background-color: var(--wikilink-bg) !important;
+  border-radius: 3px;
+  padding: 0 2px;
+  cursor: text;
+  text-decoration: none !important;
+  font-style: normal;
+}
+
+.cm-wikilink * {
+  color: inherit !important;
+  background: transparent !important;
+}
+
+.cm-wikilink:hover {
+  cursor: pointer;
+  background-color: var(--wikilink-hover-bg) !important;
+  opacity: 0.92;
+}
+
+.dark .cm-activeLine {
+  background-color: var(--gl-background-color-strong) !important;
+}
+
+/* ── Rendered Table Widget ──────────────────────────────────────── */
+
+/* Hide raw markdown lines when the table is rendered.
+   Line content is already replaced with an EmptyWidget;
+   these rules collapse the remaining line-element spacing. */
+.cm-line.cm-table-hidden {
+  height: 0 !important;
+  min-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The table widget replaces line 1's inline content.
+   display:block breaks it out of inline flow. */
+.cm-table-widget {
+  display: block;
+  margin: 4px 0 6px;
+  overflow-x: auto;
+  cursor: text;
+}
+
+.cm-rendered-table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  line-height: 1.5;
+  min-width: 200px;
+}
+
+.cm-rendered-table th,
+.cm-rendered-table td {
+  padding: 5px 14px;
+  border: 1px solid var(--gl-border-color-default);
+  text-align: left;
+  min-width: 60px;
+}
+
+.cm-rendered-table th {
+  background: var(--gl-background-color-strong);
+  font-weight: 600;
+  color: var(--gl-text-color-heading);
+}
+
+.cm-rendered-table tbody tr:hover td {
+  background: var(--gl-background-color-subtle);
+}
+
+/* ── Table Toolbar ──────────────────────────────────────────────── */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  height: 30px;
+  padding: 0 6px;
+  background: var(--gl-background-color-overlap);
+  border: 1px solid var(--gl-border-color-strong);
+  border-radius: var(--gl-border-radius-default);
+  box-shadow:
+    0 var(--gl-spacing-scale-1) var(--gl-spacing-scale-4) var(--gl-color-alpha-dark-16),
+    0 var(--gl-spacing-scale-px) var(--gl-spacing-scale-2) var(--gl-color-alpha-dark-8);
+  animation: tableToolbarIn 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+  user-select: none;
+  /* prevent the toolbar from getting wider than viewport */
+  max-width: calc(100vw - 32px);
+}
+
+@keyframes tableToolbarIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.table-toolbar-pos {
+  font-size: 10px;
+  font-family: var(--font-mono, monospace);
+  color: var(--muted-foreground);
+  letter-spacing: 0.03em;
+  padding: 0 4px 0 2px;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+.table-toolbar-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+  margin: 0 3px;
+  flex-shrink: 0;
+}
+
+.table-toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: var(--muted-foreground);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  flex-shrink: 0;
+}
+
+.table-toolbar-btn:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.table-toolbar-btn--danger {
+  color: var(--gl-text-color-danger);
+}
+
+.table-toolbar-btn--danger:hover {
+  background: var(--gl-feedback-danger-background-color);
+  color: var(--gl-feedback-danger-text-color);
+}
+
+.table-toolbar-btn--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Motion accessibility guardrails ─────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .cmd-overlay,
+  .cmd-panel {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .cmd-overlay {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--background) !important;
+  }
+
+  .cmd-panel {
+    background: var(--popover) !important;
+  }
+
+  .a11y-glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--background) !important;
+  }
+}

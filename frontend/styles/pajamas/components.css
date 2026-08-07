@@ -1,0 +1,233 @@
+/**
+ * App semantic tokens bridged to Pajamas (--gl-*).
+ * Dark mode inherits from tokens.dark.css — no duplicate oklch palettes.
+ */
+
+:root {
+  /* ── Chat panel ───────────────────────────────────────────── */
+  --chat-bg: var(--gl-background-color-subtle);
+  --chat-header-bg: var(--gl-background-color-section);
+  --chat-header-text: var(--gl-text-color-subtle);
+  --chat-border: var(--gl-border-color-subtle);
+  --chat-accent: var(--gl-color-blue-500);
+  --chat-btn-hover: var(--gl-background-color-strong);
+  --chat-btn-text: var(--gl-text-color-subtle);
+  --chat-scrollbar: var(--gl-border-color-default);
+  --chat-placeholder: var(--gl-control-placeholder-color);
+  --chat-input-bg: var(--gl-background-color-subtle);
+  --chat-input-border: var(--gl-border-color-default);
+  --chat-input-field-bg: var(--gl-control-background-color-default);
+  --chat-input-text: var(--gl-text-color-default);
+  --chat-send-bg: var(--gl-button-confirm-primary-background-color-default);
+  --chat-send-icon: var(--gl-button-confirm-primary-foreground-color-default);
+  --chat-stop-bg: var(--gl-background-color-strong);
+  --chat-stop-icon: var(--gl-text-color-default);
+  --chat-hint: var(--gl-text-color-disabled);
+  --chat-context-bg: var(--gl-feedback-info-background-color);
+  --chat-context-text: var(--gl-feedback-info-text-color);
+
+  /* User bubble */
+  --user-bubble-bg: var(--gl-feedback-strong-background-color);
+  --user-text: var(--gl-feedback-strong-text-color);
+
+  /* AI avatar */
+  --ai-avatar-bg: var(--gl-color-blue-500);
+  --ai-avatar-text: var(--gl-color-neutral-0);
+
+  /* Assistant text */
+  --assistant-text: var(--gl-text-color-default);
+  --assistant-heading: var(--gl-text-color-heading);
+  --assistant-strong: var(--gl-text-color-strong);
+  --blockquote-text: var(--gl-text-color-subtle);
+  --blockquote-border: var(--gl-border-color-strong);
+  --link-text: var(--gl-text-color-link);
+  --link-hover: var(--gl-color-blue-800);
+  --divider: var(--gl-border-color-default);
+  --cursor-color: var(--gl-color-blue-500);
+
+  /* Code */
+  --code-bg: var(--gl-background-color-strong);
+  --code-text: var(--gl-color-blue-800);
+  --code-block-bg: var(--gl-background-color-subtle);
+  --code-block-text: var(--gl-text-color-default);
+
+  /* Thinking block — info feedback */
+  --thinking-bg: var(--gl-feedback-info-background-color);
+  --thinking-bg-hover: var(--gl-status-info-background-color);
+  --thinking-content-bg: var(--gl-feedback-info-background-color);
+  --thinking-border: var(--gl-feedback-info-border-color);
+  --thinking-icon: var(--gl-feedback-info-icon-color);
+  --thinking-label: var(--gl-feedback-info-text-color);
+  --thinking-text: var(--gl-text-color-default);
+
+  /* Tool blocks */
+  --tool-bg: var(--gl-background-color-subtle);
+  --tool-bg-hover: var(--gl-background-color-strong);
+  --tool-border: var(--gl-border-color-default);
+  --tool-default-border: var(--gl-border-color-default);
+  --tool-done-border: var(--gl-feedback-success-border-color);
+  --tool-denied-border: var(--gl-feedback-danger-border-color);
+  --tool-pending-border: var(--gl-feedback-warning-border-color);
+  --tool-detail-bg: var(--gl-background-color-strong);
+  --tool-label: var(--gl-text-color-subtle);
+  --tool-code: var(--gl-text-color-default);
+  --tool-summary: var(--gl-text-color-subtle);
+  --tool-chevron: var(--gl-text-color-disabled);
+
+  /* Tool accent colors */
+  --tool-read: var(--gl-color-blue-500);
+  --tool-edit: var(--gl-color-green-500);
+  --tool-search: var(--gl-color-orange-500);
+  --tool-web: var(--gl-color-blue-400);
+  --tool-memory: var(--gl-color-purple-500);
+
+  /* Tool status */
+  --tool-pending: var(--gl-status-warning-icon-color);
+  --tool-running: var(--gl-status-info-icon-color);
+  --tool-done: var(--gl-status-success-icon-color);
+  --tool-denied: var(--gl-status-danger-icon-color);
+
+  /* Approval UI */
+  --tool-approval-bg: var(--gl-feedback-warning-background-color);
+  --tool-approval-text: var(--gl-feedback-warning-text-color);
+  --approve-bg: var(--gl-color-green-600);
+  --approve-text: var(--gl-color-neutral-0);
+  --approve-bg-hover: var(--gl-color-green-700);
+  --deny-bg: var(--gl-background-color-strong);
+  --deny-text: var(--gl-text-color-default);
+  --deny-bg-hover: var(--gl-color-neutral-200);
+
+  /* Empty state */
+  --empty-icon-bg: var(--gl-status-info-background-color);
+  --empty-title: var(--gl-text-color-heading);
+  --empty-subtitle: var(--gl-text-color-subtle);
+  --suggestion-text: var(--gl-text-color-subtle);
+  --suggestion-border: var(--gl-border-color-default);
+  --suggestion-hover-border: var(--gl-color-blue-500);
+  --suggestion-hover-bg: var(--gl-feedback-info-background-color);
+
+  /* Diff viewer */
+  --diff-border: var(--gl-border-color-default);
+  --diff-header-bg: var(--gl-feedback-info-background-color);
+  --diff-header-text: var(--gl-feedback-info-text-color);
+  --diff-add-bg: var(--gl-feedback-success-background-color);
+  --diff-add-text: var(--gl-feedback-success-text-color);
+  --diff-remove-bg: var(--gl-feedback-danger-background-color);
+  --diff-remove-text: var(--gl-feedback-danger-text-color);
+  --diff-context-bg: var(--gl-background-color-default);
+  --diff-context-text: var(--gl-text-color-default);
+
+  /* Wikilinks (CodeMirror) */
+  --wikilink-fg: var(--gl-text-color-link);
+  --wikilink-bg: var(--gl-color-blue-50);
+  --wikilink-hover-bg: var(--gl-color-blue-100);
+}
+
+/* ── Inline AI floating chrome ──────────────────────────────── */
+
+.inline-ai-bar,
+.inline-ai-card {
+  background: var(--gl-background-color-overlap);
+  border: 1px solid var(--gl-border-color-strong);
+  border-radius: var(--gl-border-radius-lg);
+  box-shadow:
+    0 var(--gl-spacing-scale-1) var(--gl-spacing-scale-4) var(--gl-color-alpha-dark-16),
+    0 var(--gl-spacing-scale-px) var(--gl-spacing-scale-2) var(--gl-color-alpha-dark-8);
+}
+
+.inline-ai-bar {
+  border-radius: var(--gl-border-radius-default);
+}
+
+.inline-ai-send {
+  background: var(--gl-button-confirm-primary-background-color-default);
+  color: var(--gl-button-confirm-primary-foreground-color-default);
+  border-radius: var(--gl-border-radius-sm);
+}
+
+.inline-ai-icon,
+.inline-ai-spin {
+  color: var(--gl-color-blue-500);
+}
+
+.diff-line--remove {
+  background: var(--gl-feedback-danger-background-color);
+  color: var(--gl-feedback-danger-text-color);
+}
+.diff-line--remove .diff-line-gutter {
+  color: var(--gl-feedback-danger-icon-color);
+}
+
+.diff-line--add {
+  background: var(--gl-feedback-success-background-color);
+  color: var(--gl-feedback-success-text-color);
+}
+.diff-line--add .diff-line-gutter {
+  color: var(--gl-feedback-success-icon-color);
+}
+
+.inline-ai-card-accept {
+  background: var(--gl-color-green-600);
+  color: var(--gl-color-neutral-0);
+  border-radius: var(--gl-border-radius-sm);
+}
+.inline-ai-card-accept:hover {
+  background: var(--gl-color-green-700);
+}
+
+.inline-ai-card-reject {
+  border-radius: var(--gl-border-radius-sm);
+  border-color: var(--gl-border-color-default);
+}
+
+/* ── Command center ─────────────────────────────────────────── */
+
+.cmd-overlay {
+  background: var(--gl-background-color-overlay);
+}
+
+.cmd-panel {
+  background: var(--gl-background-color-overlap);
+  border: 1px solid var(--gl-border-color-strong);
+  border-radius: var(--gl-border-radius-lg);
+  box-shadow:
+    0 var(--gl-spacing-scale-1) var(--gl-spacing-scale-8) var(--gl-color-alpha-dark-24),
+    0 var(--gl-spacing-scale-px) var(--gl-spacing-scale-3) var(--gl-color-alpha-dark-16);
+}
+
+.cmd-esc-hint,
+.cmd-footer-kbd {
+  background: var(--gl-background-color-strong);
+  border: 1px solid var(--gl-border-color-subtle);
+  border-radius: var(--gl-border-radius-sm);
+  color: var(--gl-text-color-subtle);
+}
+
+.cmd-item--selected {
+  background: var(--gl-background-color-strong);
+}
+
+.cmd-match {
+  color: var(--gl-text-color-link);
+  font-weight: 600;
+}
+
+/* ── Media viewer chrome ────────────────────────────────────── */
+
+.dg-media-toolbar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--gl-spacing-scale-1);
+  border-bottom: 1px solid var(--gl-border-color-subtle);
+  background: var(--gl-background-color-section);
+  padding: var(--gl-spacing-scale-2) var(--gl-spacing-scale-3);
+}
+
+.dg-media-stage {
+  background: var(--gl-color-neutral-950);
+}
+
+.dg-media-stage--light {
+  background: var(--gl-background-color-subtle);
+}

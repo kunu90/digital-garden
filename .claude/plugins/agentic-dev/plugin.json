@@ -1,0 +1,6 @@
+{
+  "name": "agentic-dev",
+  "version": "1.0.0",
+  "description": "Agentic development guide for this project's ReAct loop, context engineering, tool design, and orchestrator patterns",
+  "author": "local"
+}
