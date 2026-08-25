@@ -244,6 +244,14 @@ fi
 # Reclaim ports from previous / crashed runs.
 recycle_ports
 
+if [[ ! -d "$FRONTEND_DIR/node_modules/next" ]]; then
+  notify "Installing frontend packages (first launch)…"
+  if ! (cd "$FRONTEND_DIR" && npm install); then
+    alert "Failed to install frontend packages.\n\nCheck that Node.js is installed, then launch again."
+    exit 1
+  fi
+fi
+
 notify "Starting backend…"
 (
   cd "$BACKEND_DIR"

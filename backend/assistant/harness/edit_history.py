@@ -4,6 +4,8 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
+from vault_config import join_vault_path
+
 
 def _edits_dir(vault_path: Path) -> Path:
     return vault_path / ".garden" / "edits"
@@ -86,9 +88,7 @@ def revert_edit(vault_path: Path, note_path: str, edit_id: str) -> str:
     if entry is None:
         raise FileNotFoundError(f"Edit {edit_id} not found")
 
-    target = (vault_path / note_path).resolve()
-    if not target.is_relative_to(vault_path.resolve()):
-        raise ValueError("Path is outside the vault.")
+    target = join_vault_path(vault_path, note_path)
 
     old_content = entry["old_content"]
     target.parent.mkdir(parents=True, exist_ok=True)

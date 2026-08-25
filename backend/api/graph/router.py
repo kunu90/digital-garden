@@ -3,7 +3,7 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 
-from vault_config import get_vault_path
+from vault_config import get_vault_path, iter_markdown_files
 
 router = APIRouter(prefix="/graph", tags=["graph"])
 
@@ -33,11 +33,9 @@ def _build_name_lookup(all_notes: dict[str, Path]) -> dict[str, str]:
 
 
 def _collect_notes(vault: Path) -> dict[str, Path]:
-    root = vault.resolve()
+    root = vault.expanduser().resolve()
     all_notes: dict[str, Path] = {}
-    for md_file in sorted(root.rglob("*.md")):
-        if ".garden" in md_file.parts:
-            continue
+    for md_file in iter_markdown_files(root):
         rel = str(md_file.relative_to(root))
         all_notes[rel] = md_file
     return all_notes
