@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from assistant.harness.edit_history import list_edits, revert_edit
-from vault_config import get_vault_path
+from vault_config import get_vault_path, join_vault_path
 
 router = APIRouter(prefix="/notes", tags=["notes"])
 
@@ -73,10 +73,10 @@ def _vault() -> Path:
 
 
 def _safe_path(rel: str) -> Path:
-    target = (_vault() / rel).resolve()
-    if not target.is_relative_to(_vault().resolve()):
+    try:
+        return join_vault_path(_vault(), rel)
+    except ValueError:
         raise HTTPException(status_code=403, detail="Path is outside the vault.")
-    return target
 
 
 def _build_tree(vault_path: Path) -> list[dict]:
@@ -86,6 +86,8 @@ def _build_tree(vault_path: Path) -> list[dict]:
     def _node(p: Path) -> dict | None:
         rel = str(p.relative_to(root))
         sort_at = _tree_sort_key(p)[0]
+        if sort_at == float("-inf"):
+            sort_at = 0.0
         if p.is_dir():
             children = [
                 n

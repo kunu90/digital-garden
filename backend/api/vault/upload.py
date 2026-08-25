@@ -3,7 +3,7 @@ from pathlib import Path
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 
-from vault_config import get_vault_path
+from vault_config import get_vault_path, join_vault_path
 
 router = APIRouter(prefix="/vault", tags=["vault"])
 
@@ -27,11 +27,10 @@ def _vault() -> Path:
 
 
 def _safe_path(rel: str) -> Path:
-    vault = _vault().resolve()
-    candidate = (vault / rel).resolve()
-    if not candidate.is_relative_to(vault):
+    try:
+        return join_vault_path(_vault(), rel)
+    except ValueError:
         raise HTTPException(403, "Path is outside the vault.")
-    return candidate
 
 
 @router.post("/upload")

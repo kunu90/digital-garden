@@ -2,6 +2,8 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
+from vault_config import join_vault_path
+
 TOOL_SPEC = {
     "name": "read_file",
     "description": (
@@ -39,8 +41,9 @@ class ReadFileInput(BaseModel):
 
 
 async def run(input: ReadFileInput, vault_path: Path) -> str:
-    target = (vault_path / input.path).resolve()
-    if not target.is_relative_to(vault_path.resolve()):
+    try:
+        target = join_vault_path(vault_path, input.path)
+    except ValueError:
         return f"Error: path '{input.path}' is outside the vault."
     if not target.exists():
         return f"Error: file '{input.path}' does not exist."

@@ -4,6 +4,8 @@ from pathlib import Path
 from assistant.harness.edit_history import log_edit
 from pydantic import BaseModel
 
+from vault_config import join_vault_path
+
 TOOL_SPEC = {
     "name": "edit_file",
     "description": (
@@ -48,8 +50,9 @@ class EditFileInput(BaseModel):
 
 
 async def run(input: EditFileInput, vault_path: Path) -> str:
-    target = (vault_path / input.path).resolve()
-    if not target.is_relative_to(vault_path.resolve()):
+    try:
+        target = join_vault_path(vault_path, input.path)
+    except ValueError:
         return f"Error: path '{input.path}' is outside the vault."
 
     if input.content is not None and input.old_string is not None:

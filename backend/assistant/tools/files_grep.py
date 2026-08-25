@@ -4,6 +4,8 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
+from vault_config import iter_markdown_files
+
 TOOL_SPEC = {
     "name": "files_grep",
     "description": (
@@ -50,12 +52,9 @@ async def run(input: FilesGrepInput, vault_path: Path) -> str:
         return f"Error: invalid pattern — {e}"
 
     results: list[dict] = []
-    vault_root = vault_path.resolve()
+    vault_root = vault_path.expanduser().resolve()
 
-    for md_file in sorted(vault_root.rglob("*.md")):
-        if ".garden" in md_file.parts:
-            continue
-
+    for md_file in iter_markdown_files(vault_root):
         rel_path = str(md_file.relative_to(vault_root))
 
         # Match against relative path (includes folder) and filename

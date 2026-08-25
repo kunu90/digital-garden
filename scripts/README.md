@@ -8,7 +8,11 @@ chmod +x scripts/*.sh
 ./scripts/create-macos-app.sh
 ```
 
-Then **double-click `Digital Garden.app`** in the project folder (or drag it to your Dock).
+Then **double-click `Digital Garden.app`** in the project folder, on the Desktop, or in the Dock.
+
+The `.app` is a real macOS launcher (not an AppleScript). It starts the servers and opens the app in your browser. Do not open it with Script Editor.
+
+If you move only the `.app` to the Desktop, rebuild with `./scripts/create-macos-app.sh` so the shortcut still points at this repo.
 
 ## What the launcher does
 
@@ -45,7 +49,7 @@ npm native binaries (Tailwind, lightningcss, Next.js SWC) are **not malware** â€
 **Fix (run once after `npm install`):**
 
 ```bash
-~/Desktop/digital-garden/scripts/fix-macos-native-binaries.sh
+./scripts/fix-macos-native-binaries.sh
 ```
 
 The launcher runs this automatically. If macOS still blocks, go to **System Settings â†’ Privacy & Security** and click **Allow Anyway** for the blocked binary, then relaunch.

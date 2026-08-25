@@ -7,7 +7,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from api.vault.schemas import FolderCreate, FolderRename, VaultSettings
-from vault_config import get_vault_path, set_vault_path
+from vault_config import get_vault_path, join_vault_path, set_vault_path
 
 router = APIRouter(prefix="/vault", tags=["vault"])
 
@@ -31,10 +31,10 @@ def _settings_file() -> Path:
 
 
 def _safe_path(rel: str) -> Path:
-    target = (_vault() / rel).resolve()
-    if not target.is_relative_to(_vault().resolve()):
+    try:
+        return join_vault_path(_vault(), rel)
+    except ValueError:
         raise HTTPException(status_code=403, detail="Path is outside the vault.")
-    return target
 
 
 # ── Vault path configuration ──────────────────────────────────────────────────

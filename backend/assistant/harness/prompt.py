@@ -2,16 +2,13 @@ from datetime import date
 from pathlib import Path
 
 from assistant.harness.memory import load_memory
+from vault_config import iter_markdown_files, join_vault_path
 
 
 def _vault_tree(vault_path: Path) -> str:
     """Build a compact file tree of all .md files in the vault."""
-    root = vault_path.resolve()
-    lines = []
-    for f in sorted(root.rglob("*.md")):
-        if ".garden" in f.parts:
-            continue
-        lines.append(str(f.relative_to(root)))
+    root = vault_path.expanduser().resolve()
+    lines = [str(f.relative_to(root)) for f in iter_markdown_files(root)]
     return "\n".join(lines) if lines else "(empty vault)"
 
 
@@ -45,8 +42,11 @@ def build_system_prompt(vault_path: Path, active_note_path: str | None = None) -
     ]
 
     if active_note_path:
-        note_file = (vault_path / active_note_path).resolve()
-        if note_file.exists() and note_file.is_relative_to(vault_path.resolve()):
+        try:
+            note_file = join_vault_path(vault_path, active_note_path)
+        except ValueError:
+            note_file = None
+        if note_file is not None and note_file.exists():
             content = note_file.read_text(encoding="utf-8")
             sections.append(f"## Active note: {active_note_path}\n{content}")
 
