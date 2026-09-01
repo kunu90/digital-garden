@@ -7,13 +7,13 @@ import { Toggle as TogglePrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const toggleVariants = cva(
-  "group/toggle inline-flex items-center justify-center gap-1 rounded-[var(--gl-border-radius-sm)] text-sm font-medium whitespace-nowrap transition-[color,box-shadow,background-color] outline-none hover:bg-[var(--gl-background-color-strong)] hover:text-foreground focus-visible:ring-2 focus-visible:ring-[var(--gl-focus-ring-outer-color)] disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-pressed:bg-[var(--gl-background-color-strong)] aria-pressed:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/toggle inline-flex items-center justify-center gap-1 rounded-sm text-sm font-medium whitespace-nowrap transition-[color,box-shadow,background-color] outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-pressed:bg-muted aria-pressed:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default: "bg-transparent",
         outline:
-          "border border-[var(--gl-control-border-color-default)] bg-[var(--gl-control-background-color-default)] shadow-none hover:bg-[var(--gl-background-color-strong)]",
+          "border border-input bg-card shadow-none hover:bg-muted",
       },
       size: {
         default: "h-8 min-w-8 px-2",

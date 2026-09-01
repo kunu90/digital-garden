@@ -20,7 +20,7 @@ import { useWorkspace } from "@/context/workspace-context";
 import { InlineAIToolbar, type SelectionCoords } from "@/components/inline-ai-toolbar";
 import { TableToolbar } from "@/components/table-toolbar";
 
-// --- Structural theme (layout, spacing, cursor) — Pajamas tokens ---
+// --- Structural theme (layout, spacing, cursor) — Atlas tokens ---
 
 const lightStructure = EditorView.theme({
   "&": {
@@ -28,18 +28,18 @@ const lightStructure = EditorView.theme({
     fontSize: "15px",
     fontFamily: "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
     backgroundColor: "transparent",
-    color: "var(--gl-text-color-default)",
+    color: "var(--foreground)",
   },
   ".cm-scroller": { fontFamily: "inherit", lineHeight: "1.8", padding: "0 0 120px 0" },
-  ".cm-content": { maxWidth: "680px", margin: "0 auto", padding: "48px 48px", caretColor: "var(--gl-text-color-heading)" },
+  ".cm-content": { maxWidth: "680px", margin: "0 auto", padding: "48px 48px", caretColor: "var(--foreground)" },
   ".cm-focused": { outline: "none" },
-  ".cm-cursor": { borderLeftColor: "var(--gl-text-color-heading)", borderLeftWidth: "2px" },
-  ".cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--gl-color-blue-500) 18%, transparent) !important" },
-  "&.cm-focused .cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--gl-color-blue-500) 22%, transparent) !important" },
+  ".cm-cursor": { borderLeftColor: "var(--foreground)", borderLeftWidth: "2px" },
+  ".cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--primary) 18%, transparent) !important" },
+  "&.cm-focused .cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--primary) 22%, transparent) !important" },
   ".cm-line": { padding: "0" },
   ".cm-gutters": { display: "none" },
   ".cm-activeLineGutter": { backgroundColor: "transparent" },
-  ".cm-activeLine": { backgroundColor: "var(--gl-background-color-strong)", borderRadius: "3px" },
+  ".cm-activeLine": { backgroundColor: "var(--muted)", borderRadius: "3px" },
 });
 
 const darkStructure = EditorView.theme({
@@ -48,76 +48,76 @@ const darkStructure = EditorView.theme({
     fontSize: "15px",
     fontFamily: "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
     backgroundColor: "transparent",
-    color: "var(--gl-text-color-default)",
+    color: "var(--foreground)",
   },
   ".cm-scroller": { fontFamily: "inherit", lineHeight: "1.8", padding: "0 0 120px 0" },
-  ".cm-content": { maxWidth: "680px", margin: "0 auto", padding: "48px 48px", caretColor: "var(--gl-text-color-heading)" },
+  ".cm-content": { maxWidth: "680px", margin: "0 auto", padding: "48px 48px", caretColor: "var(--foreground)" },
   ".cm-focused": { outline: "none" },
-  ".cm-cursor": { borderLeftColor: "var(--gl-text-color-heading)", borderLeftWidth: "2px" },
-  ".cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--gl-color-blue-300) 20%, transparent) !important" },
-  "&.cm-focused .cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--gl-color-blue-300) 28%, transparent) !important" },
+  ".cm-cursor": { borderLeftColor: "var(--foreground)", borderLeftWidth: "2px" },
+  ".cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--primary) 20%, transparent) !important" },
+  "&.cm-focused .cm-selectionBackground": { backgroundColor: "color-mix(in srgb, var(--primary) 28%, transparent) !important" },
   ".cm-line": { padding: "0" },
   ".cm-gutters": { display: "none" },
   ".cm-activeLineGutter": { backgroundColor: "transparent" },
-  ".cm-activeLine": { backgroundColor: "var(--gl-background-color-strong)", borderRadius: "3px" },
+  ".cm-activeLine": { backgroundColor: "var(--muted)", borderRadius: "3px" },
 });
 
 // --- Syntax highlight styles (token colors) — Pajamas ---
 
 const lightHighlight = HighlightStyle.define([
-  { tag: t.heading1, fontSize: "1.75em", fontWeight: "800", color: "var(--gl-text-color-heading)", lineHeight: "1.3" },
-  { tag: t.heading2, fontSize: "1.4em",  fontWeight: "700", color: "var(--gl-text-color-heading)" },
-  { tag: t.heading3, fontSize: "1.18em", fontWeight: "700", color: "var(--gl-text-color-strong)" },
-  { tag: t.heading4, fontSize: "1.05em", fontWeight: "700", color: "var(--gl-text-color-default)" },
-  { tag: t.strong, fontWeight: "700", color: "var(--gl-text-color-strong)" },
+  { tag: t.heading1, fontSize: "1.75em", fontWeight: "800", color: "var(--foreground)", lineHeight: "1.3" },
+  { tag: t.heading2, fontSize: "1.4em",  fontWeight: "700", color: "var(--foreground)" },
+  { tag: t.heading3, fontSize: "1.18em", fontWeight: "700", color: "var(--foreground)" },
+  { tag: t.heading4, fontSize: "1.05em", fontWeight: "700", color: "var(--foreground)" },
+  { tag: t.strong, fontWeight: "700", color: "var(--foreground)" },
   { tag: t.emphasis, fontStyle: "italic" },
-  { tag: t.strikethrough, textDecoration: "line-through", color: "var(--gl-text-color-subtle)" },
-  { tag: t.processingInstruction, color: "var(--gl-text-color-disabled)" },
-  { tag: t.punctuation, color: "var(--gl-text-color-disabled)" },
-  { tag: [t.meta, t.bracket], color: "var(--gl-text-color-disabled)" },
-  { tag: t.link, color: "var(--gl-text-color-link)", textDecoration: "underline" },
-  { tag: t.url, color: "var(--gl-color-blue-500)" },
-  { tag: t.quote, color: "var(--gl-text-color-subtle)", fontStyle: "italic" },
-  { tag: t.monospace, fontFamily: "var(--font-mono, monospace)", color: "var(--gl-color-blue-800)", fontSize: "0.9em" },
-  { tag: t.keyword, color: "var(--gl-color-purple-500)", fontWeight: "600" },
-  { tag: t.number, color: "var(--gl-color-blue-600)" },
-  { tag: t.string, color: "var(--gl-color-green-600)" },
-  { tag: t.comment, color: "var(--gl-text-color-subtle)", fontStyle: "italic" },
-  { tag: t.variableName, color: "var(--gl-color-blue-700)" },
-  { tag: t.function(t.variableName), color: "var(--gl-color-blue-500)" },
-  { tag: t.typeName, color: "var(--gl-color-orange-600)" },
-  { tag: t.operator, color: "var(--gl-color-blue-600)" },
-  { tag: t.bool, color: "var(--gl-color-purple-500)" },
-  { tag: t.null, color: "var(--gl-color-purple-500)" },
-  { tag: t.atom, color: "var(--gl-color-blue-600)" },
+  { tag: t.strikethrough, textDecoration: "line-through", color: "var(--muted-foreground)" },
+  { tag: t.processingInstruction, color: "var(--muted-foreground)" },
+  { tag: t.punctuation, color: "var(--muted-foreground)" },
+  { tag: [t.meta, t.bracket], color: "var(--muted-foreground)" },
+  { tag: t.link, color: "var(--primary)", textDecoration: "underline" },
+  { tag: t.url, color: "var(--primary)" },
+  { tag: t.quote, color: "var(--muted-foreground)", fontStyle: "italic" },
+  { tag: t.monospace, fontFamily: "var(--font-mono, monospace)", color: "var(--primary-hover)", fontSize: "0.9em" },
+  { tag: t.keyword, color: "var(--fresh)", fontWeight: "600" },
+  { tag: t.number, color: "var(--primary-hover)" },
+  { tag: t.string, color: "var(--success)" },
+  { tag: t.comment, color: "var(--muted-foreground)", fontStyle: "italic" },
+  { tag: t.variableName, color: "var(--primary-hover)" },
+  { tag: t.function(t.variableName), color: "var(--primary)" },
+  { tag: t.typeName, color: "var(--paused)" },
+  { tag: t.operator, color: "var(--primary-hover)" },
+  { tag: t.bool, color: "var(--fresh)" },
+  { tag: t.null, color: "var(--fresh)" },
+  { tag: t.atom, color: "var(--primary-hover)" },
 ]);
 
 const darkHighlight = HighlightStyle.define([
-  { tag: t.heading1, fontSize: "1.75em", fontWeight: "800", color: "var(--gl-text-color-heading)", lineHeight: "1.3" },
-  { tag: t.heading2, fontSize: "1.4em",  fontWeight: "700", color: "var(--gl-text-color-heading)" },
-  { tag: t.heading3, fontSize: "1.18em", fontWeight: "700", color: "var(--gl-text-color-strong)" },
-  { tag: t.heading4, fontSize: "1.05em", fontWeight: "700", color: "var(--gl-text-color-default)" },
-  { tag: t.strong, fontWeight: "700", color: "var(--gl-text-color-strong)" },
+  { tag: t.heading1, fontSize: "1.75em", fontWeight: "800", color: "var(--foreground)", lineHeight: "1.3" },
+  { tag: t.heading2, fontSize: "1.4em",  fontWeight: "700", color: "var(--foreground)" },
+  { tag: t.heading3, fontSize: "1.18em", fontWeight: "700", color: "var(--foreground)" },
+  { tag: t.heading4, fontSize: "1.05em", fontWeight: "700", color: "var(--foreground)" },
+  { tag: t.strong, fontWeight: "700", color: "var(--foreground)" },
   { tag: t.emphasis, fontStyle: "italic" },
-  { tag: t.strikethrough, textDecoration: "line-through", color: "var(--gl-text-color-subtle)" },
-  { tag: t.processingInstruction, color: "var(--gl-text-color-disabled)" },
-  { tag: t.punctuation, color: "var(--gl-text-color-disabled)" },
-  { tag: [t.meta, t.bracket], color: "var(--gl-text-color-disabled)" },
-  { tag: t.link, color: "var(--gl-text-color-link)", textDecoration: "underline" },
-  { tag: t.url, color: "var(--gl-color-blue-300)" },
-  { tag: t.quote, color: "var(--gl-text-color-subtle)", fontStyle: "italic" },
-  { tag: t.monospace, fontFamily: "var(--font-mono, monospace)", color: "var(--gl-color-blue-200)", fontSize: "0.9em" },
-  { tag: t.keyword, color: "var(--gl-color-purple-300)", fontWeight: "600" },
-  { tag: t.number, color: "var(--gl-color-blue-300)" },
-  { tag: t.string, color: "var(--gl-color-green-300)" },
-  { tag: t.comment, color: "var(--gl-text-color-subtle)", fontStyle: "italic" },
-  { tag: t.variableName, color: "var(--gl-color-blue-200)" },
-  { tag: t.function(t.variableName), color: "var(--gl-color-blue-300)" },
-  { tag: t.typeName, color: "var(--gl-color-orange-300)" },
-  { tag: t.operator, color: "var(--gl-color-blue-300)" },
-  { tag: t.bool, color: "var(--gl-color-purple-300)" },
-  { tag: t.null, color: "var(--gl-color-purple-300)" },
-  { tag: t.atom, color: "var(--gl-color-blue-300)" },
+  { tag: t.strikethrough, textDecoration: "line-through", color: "var(--muted-foreground)" },
+  { tag: t.processingInstruction, color: "var(--muted-foreground)" },
+  { tag: t.punctuation, color: "var(--muted-foreground)" },
+  { tag: [t.meta, t.bracket], color: "var(--muted-foreground)" },
+  { tag: t.link, color: "var(--primary)", textDecoration: "underline" },
+  { tag: t.url, color: "var(--primary)" },
+  { tag: t.quote, color: "var(--muted-foreground)", fontStyle: "italic" },
+  { tag: t.monospace, fontFamily: "var(--font-mono, monospace)", color: "var(--primary)", fontSize: "0.9em" },
+  { tag: t.keyword, color: "var(--fresh)", fontWeight: "600" },
+  { tag: t.number, color: "var(--primary)" },
+  { tag: t.string, color: "var(--success)" },
+  { tag: t.comment, color: "var(--muted-foreground)", fontStyle: "italic" },
+  { tag: t.variableName, color: "var(--primary)" },
+  { tag: t.function(t.variableName), color: "var(--primary)" },
+  { tag: t.typeName, color: "var(--paused)" },
+  { tag: t.operator, color: "var(--primary)" },
+  { tag: t.bool, color: "var(--fresh)" },
+  { tag: t.null, color: "var(--fresh)" },
+  { tag: t.atom, color: "var(--primary)" },
 ]);
 
 const baseExtensions = [
@@ -399,7 +399,7 @@ export function MarkdownEditor({ filePath }: Props) {
 
   return (
     <div
-      className="h-full bg-[var(--gl-background-color-default)]"
+      className="h-full bg-[var(--editor-bg)]"
       style={{ position: "relative" }}
       onDragOver={handleEditorDragOver}
       onDragLeave={handleEditorDragLeave}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Plus, Send, Square, Sparkles, ChevronDown } from "lucide-react";
+import { Icon } from "@/components/icon";
 import { cn } from "@/lib/utils";
 import { getHealth } from "@/lib/api";
 import { useChat } from "@/hooks/use-chat";
@@ -105,7 +105,7 @@ export function ChatPanel({ activeNotePath, onFileEdit }: ChatPanelProps) {
     <div className="flex flex-col h-full bg-background">
       <div className="flex h-10 items-center justify-between shrink-0 border-b border-border px-3">
         <div className="flex items-center gap-1.5 min-w-0">
-          <Sparkles size={13} className="text-muted-foreground shrink-0" />
+          <Icon name="auto_awesome" size={16} className="text-muted-foreground shrink-0" />
           <div className="relative min-w-0" ref={sessionsRef}>
             <button
               type="button"
@@ -113,7 +113,7 @@ export function ChatPanel({ activeNotePath, onFileEdit }: ChatPanelProps) {
               className="flex items-center gap-1 max-w-[180px] text-[11px] font-semibold tracking-wide text-muted-foreground uppercase hover:text-foreground transition-colors"
             >
               <span className="truncate">{currentPreview.slice(0, 28) || "Agent"}</span>
-              <ChevronDown size={11} className="shrink-0" />
+              <Icon name="expand_more" size={16} className="shrink-0" />
             </button>
             {sessionsOpen && (
               <div className="absolute left-0 top-full z-50 mt-1 w-56 rounded-md border border-border bg-popover shadow-md py-1 max-h-48 overflow-y-auto">
@@ -150,15 +150,15 @@ export function ChatPanel({ activeNotePath, onFileEdit }: ChatPanelProps) {
           title="New conversation"
           className="flex items-center gap-1 px-1.5 py-1 rounded-sm text-[11px] transition-colors hover:bg-accent text-muted-foreground shrink-0"
         >
-          <Plus size={11} />
+          <Icon name="add" size={16} />
           New
         </button>
       </div>
 
       {anthropicConfigured === false && (
-        <div className="shrink-0 border-b border-[var(--gl-feedback-warning-border-color)] bg-[var(--gl-feedback-warning-background-color)] px-3 py-2 text-[11px] leading-snug text-[var(--gl-feedback-warning-text-color)]">
-          Add your Anthropic API key to <code className="rounded bg-[var(--gl-color-alpha-dark-8)] px-1 py-0.5 font-mono text-[10px]">backend/.env</code> as{" "}
-          <code className="rounded bg-[var(--gl-color-alpha-dark-8)] px-1 py-0.5 font-mono text-[10px]">ANTHROPIC_API_KEY</code>, then restart the app. See{" "}
+        <div className="shrink-0 border-b border-[color-mix(in_srgb,var(--attention)_25%,var(--border))] bg-[color-mix(in_srgb,var(--attention)_8%,var(--card))] px-3 py-2 text-[11px] leading-snug text-[var(--attention)]">
+          Add your Anthropic API key to <code className="rounded bg-black/8 px-1 py-0.5 font-mono text-[10px]">backend/.env</code> as{" "}
+          <code className="rounded bg-black/8 px-1 py-0.5 font-mono text-[10px]">ANTHROPIC_API_KEY</code>, then restart the app. See{" "}
           <code className="font-mono text-[10px]">backend/API_KEYS.md</code>.
         </div>
       )}
@@ -243,14 +243,14 @@ export function ChatPanel({ activeNotePath, onFileEdit }: ChatPanelProps) {
               "shrink-0 h-[22px] w-[22px] rounded-[3px] flex items-center justify-center transition-all mb-px",
               isStreaming
                 ? "bg-destructive/10 text-destructive hover:bg-destructive/20 cursor-pointer"
-                : "bg-foreground text-background hover:opacity-75 active:scale-95 disabled:opacity-25 disabled:cursor-not-allowed"
+                : "bg-foreground text-background hover:opacity-75 disabled:opacity-25 disabled:cursor-not-allowed"
             )}
           >
             {isStreaming ? (
-              <Square size={10} fill="currentColor" />
-            ) : (
-              <Send size={11} />
-            )}
+                <Icon name="stop" size={16} filled />
+              ) : (
+                <Icon name="send" size={16} />
+              )}
           </button>
         </div>
       </div>
@@ -270,7 +270,7 @@ function EmptyState({ onSuggest }: { onSuggest: (s: string) => void }) {
     <div className="flex flex-col items-center justify-center h-full gap-5 py-6">
       <div className="flex flex-col items-center gap-2">
         <div className="w-8 h-8 rounded-md flex items-center justify-center bg-accent">
-          <Sparkles size={15} className="text-muted-foreground" />
+          <Icon name="auto_awesome" size={16} className="text-muted-foreground" />
         </div>
         <p className="text-[11px] font-semibold text-foreground">Writing Agent</p>
         <p className="text-[11px] text-center text-muted-foreground max-w-[180px]">

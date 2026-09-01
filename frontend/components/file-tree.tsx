@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
-import { FilePlus2, Folder, FolderPlus, Plus, Search, Upload, X, ChevronsUpDown } from "lucide-react";
+import { Icon } from "@/components/icon";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,7 +34,7 @@ function highlightMatch(text: string, query: string) {
   return (
     <>
       <span>{text.slice(0, idx)}</span>
-      <mark className="rounded-[2px] bg-[var(--gl-status-warning-background-color)] px-0 text-[var(--gl-status-warning-text-color)]">
+      <mark className="rounded-[2px] bg-[color-mix(in_srgb,var(--attention)_12%,var(--card))] px-0 text-[var(--attention)]">
         {text.slice(idx, idx + query.length)}
       </mark>
       <span>{text.slice(idx + query.length)}</span>
@@ -78,7 +78,7 @@ function EmptyState() {
   return (
     <div className="flex flex-col items-center gap-2 px-4 py-8">
       <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-muted text-muted-foreground">
-        <Folder size={16} />
+        <Icon name="folder" size={16} />
       </div>
       <p className="text-center text-xs leading-relaxed text-muted-foreground">
         No notes yet.{" "}
@@ -270,25 +270,25 @@ export function FileTree() {
               title="Collapse all"
               className="flex h-6 w-6 items-center justify-center rounded-sm text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
-              <ChevronsUpDown size={12} />
+              <Icon name="unfold_less" size={16} />
             </button>
           )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex h-6 w-6 items-center justify-center rounded-sm text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
-                <Plus size={14} />
+                <Icon name="add" size={16} />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="bottom" align="end" className="min-w-[140px]" onCloseAutoFocus={(e) => e.preventDefault()}>
-              <DropdownMenuItem className="gap-1.5 py-1 text-[11px] [&_svg:not([class*='size-'])]:size-3" onSelect={() => setPendingNew("file")}>
-                <FilePlus2 /> New Note
+              <DropdownMenuItem className="gap-1.5 py-1 text-[11px]" onSelect={() => setPendingNew("file")}>
+                <Icon name="note_add" size={16} /> New Note
               </DropdownMenuItem>
-              <DropdownMenuItem className="gap-1.5 py-1 text-[11px] [&_svg:not([class*='size-'])]:size-3" onSelect={() => setPendingNew("folder")}>
-                <FolderPlus /> New Folder
+              <DropdownMenuItem className="gap-1.5 py-1 text-[11px]" onSelect={() => setPendingNew("folder")}>
+                <Icon name="create_new_folder" size={16} /> New Folder
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="gap-1.5 py-1 text-[11px] [&_svg:not([class*='size-'])]:size-3" onSelect={() => setTimeout(() => uploadInputRef.current?.click(), 0)}>
-                <Upload /> Upload Files
+              <DropdownMenuItem className="gap-1.5 py-1 text-[11px]" onSelect={() => setTimeout(() => uploadInputRef.current?.click(), 0)}>
+                <Icon name="upload" size={16} /> Upload Files
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -305,8 +305,9 @@ export function FileTree() {
 
       {/* Search */}
       <div className="relative mx-2 mb-2">
-        <Search
-          size={12}
+        <Icon
+          name="search"
+          size={16}
           className={cn(
             "absolute left-2.5 top-1/2 -translate-y-1/2 transition-colors",
             isSearchFocused || searchQuery ? "text-muted-foreground" : "text-muted-foreground/50"
@@ -319,14 +320,14 @@ export function FileTree() {
           onFocus={() => setIsSearchFocused(true)}
           onBlur={() => setIsSearchFocused(false)}
           placeholder="Filter notes…"
-          className="h-7 w-full rounded-sm border border-border bg-background pl-7 pr-7 text-xs text-foreground outline-none placeholder:text-muted-foreground focus:border-[var(--gl-control-border-color-focus)] focus:ring-1 focus:ring-[var(--gl-focus-ring-outer-color)]"
+          className="h-7 w-full rounded-sm border border-border bg-background pl-7 pr-7 text-xs text-foreground outline-none placeholder:text-muted-foreground focus:border-[var(--ring)] focus:ring-1 focus:ring-[var(--ring)]"
         />
         {searchQuery && (
           <button
             onClick={() => setSearchQuery("")}
             className="absolute right-1.5 top-1/2 flex h-4 w-4 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground/40 hover:text-muted-foreground"
           >
-            <X size={10} />
+            <Icon name="close" size={16} />
           </button>
         )}
       </div>
@@ -395,9 +396,9 @@ export function FileTree() {
       {(isDraggingAny || isExternalDragging) && !isSearching && isRootDragOver && (
         <div className="pointer-events-none mx-1.5 mt-1 flex h-6 items-center justify-center gap-1.5 rounded-[3px] border border-dashed border-sidebar-primary/50 bg-sidebar-primary/8 text-[10px] text-sidebar-primary">
           {isExternalDragging && !isDraggingAny ? (
-            <><Upload size={10} /> Drop to upload to root</>
+            <><Icon name="upload" size={16} /> Drop to upload to root</>
           ) : (
-            <><Folder size={10} /> Move to root</>
+            <><Icon name="folder" size={16} /> Move to root</>
           )}
         </div>
       )}

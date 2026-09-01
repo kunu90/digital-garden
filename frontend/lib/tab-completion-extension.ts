@@ -74,7 +74,7 @@ class GhostWidget extends WidgetType {
 function ghostTheme(_isDark: boolean) {
   return EditorView.baseTheme({
     ".cm-ghost-text": {
-      color: "var(--gl-text-color-disabled)",
+      color: "var(--muted-foreground)",
       fontStyle: "italic",
       pointerEvents: "none",
       userSelect: "none",

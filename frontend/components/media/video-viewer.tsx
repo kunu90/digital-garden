@@ -8,7 +8,7 @@ interface Props {
 export function VideoViewer({ url, name }: Props) {
   return (
     <div className="flex h-full flex-col dg-media-stage">
-      <p className="shrink-0 truncate px-4 py-2 text-xs text-[var(--gl-text-color-subtle)]">{name}</p>
+      <p className="shrink-0 truncate px-4 py-2 text-xs text-[var(--muted-foreground)]">{name}</p>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video
         controls

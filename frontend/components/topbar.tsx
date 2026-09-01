@@ -1,10 +1,10 @@
 "use client";
 
-import { Columns2, GitFork, Moon, Sun, Sparkles, Search, Keyboard, Undo2, Sprout } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { Popover as PopoverPrimitive } from "radix-ui";
+import { useEffect, useState, type ReactNode } from "react";
+import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { useWorkspace, GRAPH_TAB_PATH } from "@/context/workspace-context";
 import { cn } from "@/lib/utils";
@@ -34,9 +34,9 @@ const SHORTCUTS = [
   },
 ];
 
-function Kbd({ children }: { children: React.ReactNode }) {
+function Kbd({ children }: { children: ReactNode }) {
   return (
-    <kbd className="inline-flex items-center justify-center rounded-[var(--gl-border-radius-sm)] border border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-strong)] px-1.5 py-0.5 font-mono text-[11px] leading-none text-[var(--gl-text-color-subtle)]">
+    <kbd className="inline-flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--muted)] px-1.5 py-0.5 font-mono text-[11px] leading-none text-[var(--muted-foreground)]">
       {children}
     </kbd>
   );
@@ -44,45 +44,41 @@ function Kbd({ children }: { children: React.ReactNode }) {
 
 function KeyboardShortcutsPopover() {
   return (
-    <PopoverPrimitive.Root>
-      <PopoverPrimitive.Trigger asChild>
-        <Button variant="ghost" size="icon-sm" title="Keyboard shortcuts">
-          <Keyboard size={16} />
-        </Button>
-      </PopoverPrimitive.Trigger>
-      <PopoverPrimitive.Portal>
-        <PopoverPrimitive.Content
-          align="end"
-          sideOffset={6}
-          className="z-50 w-72 rounded-[var(--gl-border-radius-lg)] border border-[var(--gl-border-color-strong)] bg-[var(--gl-background-color-overlap)] p-4 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
-        >
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Keyboard Shortcuts
-          </p>
-          <div className="space-y-4">
-            {SHORTCUTS.map((group) => (
-              <div key={group.section}>
-                <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60">
-                  {group.section}
-                </p>
-                <div className="space-y-1.5">
-                  {group.items.map((item, i) => (
-                    <div key={i} className="flex items-center justify-between gap-3">
-                      <span className="text-xs text-foreground/80">{item.description}</span>
-                      <div className="flex shrink-0 items-center gap-0.5">
-                        {item.keys.map((k, j) => (
-                          <Kbd key={j}>{k}</Kbd>
-                        ))}
-                      </div>
+    <Popover>
+      <PopoverTrigger
+        render={
+          <Button variant="ghost" size="icon-sm" title="Keyboard shortcuts">
+            <Icon name="keyboard" size={16} />
+          </Button>
+        }
+      />
+      <PopoverContent align="end" sideOffset={6} className="w-72">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          Keyboard Shortcuts
+        </p>
+        <div className="space-y-4">
+          {SHORTCUTS.map((group) => (
+            <div key={group.section}>
+              <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60">
+                {group.section}
+              </p>
+              <div className="space-y-1.5">
+                {group.items.map((item, i) => (
+                  <div key={i} className="flex items-center justify-between gap-3">
+                    <span className="text-xs text-foreground/80">{item.description}</span>
+                    <div className="flex shrink-0 items-center gap-0.5">
+                      {item.keys.map((k, j) => (
+                        <Kbd key={j}>{k}</Kbd>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </PopoverPrimitive.Content>
-      </PopoverPrimitive.Portal>
-    </PopoverPrimitive.Root>
+            </div>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
 
@@ -134,7 +130,7 @@ export function Topbar({ chatOpen, onToggleChat, onOpenCommand }: TopbarProps) {
     <TopBarRegion>
       <div className="dg-topbar__nav">
         <div className="dg-topbar__brand">
-          <Sprout size={16} className="dg-topbar__brand-icon" aria-hidden />
+          <Icon name="potted_plant" size={16} className="dg-topbar__brand-icon" />
           <span>Digital Garden</span>
         </div>
         <SidebarExpandWhenCollapsed />
@@ -146,7 +142,7 @@ export function Topbar({ chatOpen, onToggleChat, onOpenCommand }: TopbarProps) {
           onClick={onOpenCommand}
           title="Search files (⌘K)"
         >
-          <Search size={16} />
+          <Icon name="search" size={16} />
         </Button>
         <Button
           variant="ghost"
@@ -155,7 +151,7 @@ export function Topbar({ chatOpen, onToggleChat, onOpenCommand }: TopbarProps) {
           onClick={() => openFile(GRAPH_TAB_PATH)}
           title="Open graph view"
         >
-          <GitFork size={16} />
+          <Icon name="account_tree" size={16} />
         </Button>
         <Button
           variant="ghost"
@@ -164,7 +160,7 @@ export function Topbar({ chatOpen, onToggleChat, onOpenCommand }: TopbarProps) {
           onClick={() => (isSplit ? unsplitPane() : splitPane())}
           title={isSplit ? "Close split" : "Split editor"}
         >
-          <Columns2 size={16} />
+          <Icon name="view_column_2" size={16} />
         </Button>
         <Button
           variant="ghost"
@@ -173,7 +169,7 @@ export function Topbar({ chatOpen, onToggleChat, onOpenCommand }: TopbarProps) {
           onClick={onToggleChat}
           title={chatOpen ? "Close agent" : "Open agent"}
         >
-          <Sparkles size={16} />
+          <Icon name="auto_awesome" size={16} filled={chatOpen} />
         </Button>
         {canRevert && (
           <Button
@@ -183,7 +179,7 @@ export function Topbar({ chatOpen, onToggleChat, onOpenCommand }: TopbarProps) {
             disabled={reverting}
             title="Undo last AI edit"
           >
-            <Undo2 size={16} />
+            <Icon name="undo" size={16} />
           </Button>
         )}
         <KeyboardShortcutsPopover />
@@ -193,7 +189,11 @@ export function Topbar({ chatOpen, onToggleChat, onOpenCommand }: TopbarProps) {
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
           aria-label="Toggle theme"
         >
-          {mounted && resolvedTheme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          {mounted && resolvedTheme === "dark" ? (
+            <Icon name="light_mode" size={16} />
+          ) : (
+            <Icon name="dark_mode" size={16} />
+          )}
         </Button>
       </div>
     </TopBarRegion>

@@ -19,7 +19,7 @@ export function AudioViewer({ url, name }: Props) {
         controls
         src={url}
         className="w-full max-w-md"
-        style={{ accentColor: "var(--gl-color-blue-500)" }}
+        style={{ accentColor: "var(--primary)" }}
       />
     </div>
   );

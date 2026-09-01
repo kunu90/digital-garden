@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, FileText, Sparkles } from "lucide-react";
+import { Icon } from "@/components/icon";
 import { useNotesList } from "@/hooks/use-notes-list";
 import { searchNotes, streamAgenticSearch, type SearchMatch } from "@/lib/api";
 import { useCommandPaletteTransition } from "@/hooks/use-command-palette-transition";
@@ -296,7 +296,7 @@ export function CommandCenter({ open, onClose, onOpenFile }: CommandCenterProps)
           >
         {/* Search input */}
         <div className="cmd-search-row">
-          <Search className="cmd-search-icon" size={16} />
+          <Icon name="search" className="cmd-search-icon" size={16} />
           <input
             ref={inputRef}
             className="cmd-search-input"
@@ -318,7 +318,7 @@ export function CommandCenter({ open, onClose, onOpenFile }: CommandCenterProps)
           {isAskVault && (
             <div className="px-3 py-2">
               <div className="cmd-section-label flex items-center gap-1">
-                <Sparkles size={12} />
+                <Icon name="auto_awesome" size={16} />
                 Ask vault
                 {agenticLoading && <span className="cmd-section-loading"> thinking…</span>}
               </div>
@@ -354,7 +354,7 @@ export function CommandCenter({ open, onClose, onOpenFile }: CommandCenterProps)
                     onMouseEnter={() => setSelectedIndex(idx)}
                     onClick={() => handleSelect(item.path)}
                   >
-                    <FileText className="cmd-file-icon" size={14} />
+                    <Icon name="description" className="cmd-file-icon" size={16} />
                     <div className="cmd-item-text">
                       <span className="cmd-file-name">
                         <HighlightMatch text={item.name} query={query} />
@@ -388,7 +388,7 @@ export function CommandCenter({ open, onClose, onOpenFile }: CommandCenterProps)
                     onMouseEnter={() => setSelectedIndex(idx)}
                     onClick={() => handleSelect(item.file)}
                   >
-                    <FileText className="cmd-file-icon" size={14} />
+                    <Icon name="description" className="cmd-file-icon" size={16} />
                     <div className="cmd-item-text">
                       <div style={{ display: "flex", alignItems: "baseline", gap: 0, overflow: "hidden" }}>
                         <span className="cmd-file-name" style={{ flexShrink: 0 }}>

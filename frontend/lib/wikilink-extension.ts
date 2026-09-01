@@ -74,10 +74,10 @@ function wikilinkPlugin(onNavigate: (name: string) => void) {
 function wikilinkTheme() {
   return EditorView.baseTheme({
     ".cm-tooltip.cm-tooltip-autocomplete": {
-      border: "1px solid var(--gl-border-color-strong)",
-      borderRadius: "var(--gl-border-radius-default)",
-      background: "var(--gl-background-color-overlap)",
-      boxShadow: "0 var(--gl-spacing-scale-1) var(--gl-spacing-scale-3) var(--gl-color-alpha-dark-16)",
+      border: "1px solid var(--border)",
+      borderRadius: "var(--radius)",
+      background: "var(--popover)",
+      boxShadow: "var(--shadow-md)",
       overflow: "hidden",
       fontFamily: "var(--font-sans)",
       fontSize: "13px",

@@ -2,19 +2,15 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* Pajamas design tokens (vendored — no @gitlab/ui runtime) */
-@import "../styles/pajamas/tokens.css";
-@import "../styles/pajamas/tokens.dark.css";
-@import "../styles/pajamas/layout.css";
-@import "../styles/pajamas/components.css";
+@import "../styles/atlas/layout.css";
+@import "../styles/atlas/components.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -40,74 +36,190 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-foreground: var(--foreground);
   --color-editor-bg: var(--editor-bg);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-background: var(--background);
+  --color-success: var(--success);
+  --color-paused: var(--paused);
+  --color-attention: var(--attention);
+  --color-fresh: var(--fresh);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.25rem;
+  --shadow-2xs: 0 0 #0000;
+  --shadow-xs: 0 0 #0000;
+  --shadow-sm: 0 0 #0000;
+  --shadow-md: 0 4.5px 9px -4.5px rgb(0 0 0 / 0.12),
+    0 6px 19px -3px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 8px 16px -6px rgb(0 0 0 / 0.12),
+    0 12px 28px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 16px 32px -8px rgb(0 0 0 / 0.16);
+  --shadow-2xl: 0 24px 48px -12px rgb(0 0 0 / 0.2);
+  --animate-fade: fade 150ms ease;
+  --text-caption: 0.75rem;
+  --text-body: 0.875rem;
+  --text-heading-sm: 1.5rem;
+  --text-heading-md: 1.875rem;
+  --text-heading-lg: 2.25rem;
+  --text-heading-xl: 3rem;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 :root {
-  /* ── Pajamas → app semantic bridge ───────────────────────── */
-  --background: var(--gl-background-color-default);
-  --foreground: var(--gl-text-color-default);
-  --card: var(--gl-background-color-section);
-  --card-foreground: var(--gl-text-color-default);
-  --popover: var(--gl-background-color-overlap);
-  --popover-foreground: var(--gl-text-color-default);
-  --primary: var(--gl-button-confirm-primary-background-color-default);
-  --primary-foreground: var(--gl-button-confirm-primary-foreground-color-default);
-  --secondary: var(--gl-background-color-strong);
-  --secondary-foreground: var(--gl-text-color-default);
-  --muted: var(--gl-background-color-strong);
-  --muted-foreground: var(--gl-text-color-subtle);
-  --accent: var(--gl-background-color-strong);
-  --accent-foreground: var(--gl-text-color-default);
-  --destructive: var(--gl-text-color-danger);
-  --border: var(--gl-border-color-default);
-  --input: var(--gl-control-border-color-default);
-  --ring: var(--gl-focus-ring-outer-color);
-  --chart-1: var(--gl-color-blue-500);
-  --chart-2: var(--gl-color-blue-600);
-  --chart-3: var(--gl-color-blue-700);
-  --chart-4: var(--gl-color-blue-800);
-  --chart-5: var(--gl-color-blue-900);
-  --radius: var(--gl-border-radius-default);
-  --sidebar: transparent;
-  --sidebar-foreground: var(--gl-text-color-default);
-  --sidebar-primary: var(--gl-color-blue-500);
-  --sidebar-primary-foreground: var(--gl-color-neutral-0);
-  --sidebar-accent: var(--gl-background-color-strong);
-  --sidebar-accent-foreground: var(--gl-text-color-default);
-  --sidebar-border: var(--gl-border-color-subtle);
-  --sidebar-ring: var(--gl-focus-ring-outer-color);
+  --background: #f7f7fa;
+  --foreground: #0f131e;
+  --card: #ffffff;
+  --card-foreground: #0f131e;
+  --popover: #ffffff;
+  --popover-foreground: #0f131e;
+  --primary: #0091fe;
+  --primary-hover: #0076d1;
+  --primary-foreground: #ffffff;
+  --secondary: #efeff5;
+  --secondary-foreground: #0f131e;
+  --muted: #efeff5;
+  --muted-foreground: #737684;
+  --accent: #f7f7fa;
+  --accent-foreground: #0f131e;
+  --destructive: #e33c53;
+  --border: #efeff5;
+  --input: #d9d9e2;
+  --ring: #0091fe;
+  --chart-1: #9568ff;
+  --chart-2: #64cdee;
+  --chart-3: #748ea1;
+  --chart-4: #ffcd40;
+  --chart-5: #df6780;
+  --success: #1f8a4c;
+  --paused: #d97706;
+  --attention: #c59a12;
+  --fresh: #7c5cdb;
+  --radius: 0.625rem;
+  --sidebar: #efeff5;
+  --sidebar-foreground: #0f131e;
+  --sidebar-primary: #0091fe;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffffff;
+  --sidebar-accent-foreground: #0f131e;
+  --sidebar-border: #efeff5;
+  --sidebar-ring: #0091fe;
+  --editor-bg: #ffffff;
+}
 
-  /* Writing surface — same as Pajamas default (inside section card) */
-  --editor-bg: var(--gl-background-color-default);
-
-  /* Chat / agent / diff / wikilink semantic tokens live in
-     styles/pajamas/components.css and inherit dark mode from --gl-*. */
+.dark {
+  --background: #12141c;
+  --foreground: #f4f5f8;
+  --card: #1a1c26;
+  --card-foreground: #f4f5f8;
+  --popover: #1a1c26;
+  --popover-foreground: #f4f5f8;
+  --primary: #0091fe;
+  --primary-hover: #33a7fe;
+  --primary-foreground: #ffffff;
+  --secondary: #1f2230;
+  --secondary-foreground: #f4f5f8;
+  --muted: #1f2230;
+  --muted-foreground: #9aa0b0;
+  --accent: #1f2230;
+  --accent-foreground: #f4f5f8;
+  --destructive: #e33c53;
+  --border: #2a2d3a;
+  --input: #3a3d4c;
+  --ring: #0091fe;
+  --chart-1: #9568ff;
+  --chart-2: #64cdee;
+  --chart-3: #748ea1;
+  --chart-4: #ffcd40;
+  --chart-5: #df6780;
+  --success: #3dbe72;
+  --paused: #f0a13a;
+  --attention: #e6c04a;
+  --fresh: #9b84e8;
+  --sidebar: #161822;
+  --sidebar-foreground: #f4f5f8;
+  --sidebar-primary: #0091fe;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1f2230;
+  --sidebar-accent-foreground: #f4f5f8;
+  --sidebar-border: #2a2d3a;
+  --sidebar-ring: #0091fe;
+  --editor-bg: #1a1c26;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
     @apply font-sans;
+    letter-spacing: 0;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: 0;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 }
 
+.icon {
+  font-family: "Material Symbols Outlined", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: inherit;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+}
+
+.icon[data-filled="true"] {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20;
+}
 
 /* ── Inline AI — prompt/loading pill ───────────────────────── */
 .inline-ai-bar {
@@ -116,7 +228,7 @@
   gap: 6px;
   height: 36px;
   padding: 0 10px;
-  /* surface/border/shadow from pajamas/components.css */
+  /* surface/border/shadow from atlas/components.css */
   animation: inlineAiIn 0.14s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: auto;
 }
@@ -164,7 +276,7 @@
 }
 
 .inline-ai-send {
-  /* colors from pajamas/components.css */
+  /* colors from atlas/components.css */
 }
 .inline-ai-send:hover { opacity: 0.82; }
 
@@ -214,7 +326,7 @@
   display: flex;
   flex-direction: column;
   max-height: 360px;
-  /* surface/border/shadow from pajamas/components.css */
+  /* surface/border/shadow from atlas/components.css */
   overflow: hidden;
   animation: inlineAiIn 0.14s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: auto;
@@ -265,7 +377,7 @@
 }
 .diff-line--equal .diff-line-gutter { opacity: 0; }
 
-/* Removed / added lines — colors from pajamas/components.css */
+/* Removed / added lines — colors from atlas/components.css */
 .diff-line--remove {}
 .diff-line--add {}
 
@@ -284,7 +396,7 @@
   align-items: center;
   gap: 5px;
   padding: 5px 13px;
-  /* colors from pajamas/components.css */
+  /* colors from atlas/components.css */
   border: none;
   font-size: 12px;
   font-family: inherit;
@@ -332,7 +444,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  /* background from pajamas/components.css */
+  /* background from atlas/components.css */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   display: flex;
@@ -344,7 +456,7 @@
 .cmd-panel {
   width: 100%;
   max-width: 580px;
-  /* surface/border/shadow from pajamas/components.css */
+  /* surface/border/shadow from atlas/components.css */
   overflow: hidden;
 }
 
@@ -430,7 +542,7 @@
 }
 
 .cmd-item--selected {
-  background: var(--gl-background-color-strong);
+  background: var(--muted);
 }
 
 .cmd-item--selected .cmd-file-name {
@@ -530,7 +642,7 @@
 }
 
 .cmd-match {
-  color: var(--gl-text-color-link);
+  color: var(--primary);
   font-weight: 600;
 }
 
@@ -560,9 +672,9 @@
 .cmd-footer-hint kbd {
   font-family: var(--font-mono, monospace);
   font-size: 10px;
-  background: var(--gl-background-color-strong);
-  border: 1px solid var(--gl-border-color-subtle);
-  border-radius: var(--gl-border-radius-sm);
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 1px 5px;
 }
 
@@ -616,7 +728,7 @@
 }
 
 .dark .cm-activeLine {
-  background-color: var(--gl-background-color-strong) !important;
+  background-color: var(--muted) !important;
 }
 
 /* ── Rendered Table Widget ──────────────────────────────────────── */
@@ -653,19 +765,19 @@
 .cm-rendered-table th,
 .cm-rendered-table td {
   padding: 5px 14px;
-  border: 1px solid var(--gl-border-color-default);
+  border: 1px solid var(--border);
   text-align: left;
   min-width: 60px;
 }
 
 .cm-rendered-table th {
-  background: var(--gl-background-color-strong);
+  background: var(--muted);
   font-weight: 600;
-  color: var(--gl-text-color-heading);
+  color: var(--foreground);
 }
 
 .cm-rendered-table tbody tr:hover td {
-  background: var(--gl-background-color-subtle);
+  background: var(--background);
 }
 
 /* ── Table Toolbar ──────────────────────────────────────────────── */
@@ -675,12 +787,10 @@
   gap: 1px;
   height: 30px;
   padding: 0 6px;
-  background: var(--gl-background-color-overlap);
-  border: 1px solid var(--gl-border-color-strong);
-  border-radius: var(--gl-border-radius-default);
-  box-shadow:
-    0 var(--gl-spacing-scale-1) var(--gl-spacing-scale-4) var(--gl-color-alpha-dark-16),
-    0 var(--gl-spacing-scale-px) var(--gl-spacing-scale-2) var(--gl-color-alpha-dark-8);
+  background: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
   animation: tableToolbarIn 0.12s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: auto;
   user-select: none;
@@ -732,12 +842,12 @@
 }
 
 .table-toolbar-btn--danger {
-  color: var(--gl-text-color-danger);
+  color: var(--destructive);
 }
 
 .table-toolbar-btn--danger:hover {
-  background: var(--gl-feedback-danger-background-color);
-  color: var(--gl-feedback-danger-text-color);
+  background: color-mix(in srgb, var(--destructive) 8%, var(--card));
+  color: var(--destructive);
 }
 
 .table-toolbar-btn--disabled {

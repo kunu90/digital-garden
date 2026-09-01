@@ -86,39 +86,39 @@ type Theme = {
   overlay: string; overlayText: string;
 };
 
-/** Pajamas-aligned palette (oklch of --gl-color-* for canvas animation). */
+/** Atlas-aligned palette (oklch of Atlas hex for canvas animation). */
 const DARK_THEME: Theme = {
-  bg: "oklch(0.208 0.012 293.0)", // neutral-950
-  edge: "oklch(0.412 0.105 295.1 / 0.65)", // #503D7D
-  edgeHighlight: "oklch(0.893 0.071 311.1)", // #EBCFFF — matches hover node
-  nodeExists: "oklch(0.412 0.105 295.1)", // #503D7D — default note
-  nodeGhost: "oklch(0.345 0.012 298.8)", // neutral-800
-  nodeActive: "oklch(0.565 0.130 61.8)", // orange-500
-  nodeHover: "oklch(0.893 0.071 311.1)", // #EBCFFF — hover
-  nodeDrag: "oklch(0.557 0.176 293.4)", // purple-500
-  nodeSearch: "oklch(0.543 0.134 153.2)", // green-500
-  label: "oklch(0.944 0.004 286.3)", // neutral-50
-  labelGhost: "oklch(0.629 0.007 295.4)", // neutral-400
-  labelBg: "oklch(0.208 0.012 293.0 / 0.75)",
-  overlay: "oklch(0.276 0.011 293.3 / 0.7)", // neutral-900
-  overlayText: "oklch(0.629 0.007 295.4)",
+  bg: "oklch(0.200 0.015 270)", // #12141C
+  edge: "oklch(0.650 0.160 245 / 0.45)", // #0091FE
+  edgeHighlight: "oklch(0.720 0.140 245)", // #33A7FE
+  nodeExists: "oklch(0.650 0.160 245)", // #0091FE
+  nodeGhost: "oklch(0.280 0.020 270)", // #2A2D3A
+  nodeActive: "oklch(0.720 0.160 60)", // #F0A13A paused
+  nodeHover: "oklch(0.720 0.140 245)", // #33A7FE
+  nodeDrag: "oklch(0.620 0.140 290)", // #9B84E8 fresh
+  nodeSearch: "oklch(0.680 0.140 150)", // #3DBE72 success
+  label: "oklch(0.960 0.005 270)", // #F4F5F8
+  labelGhost: "oklch(0.680 0.015 270)", // #9AA0B0
+  labelBg: "oklch(0.200 0.015 270 / 0.75)",
+  overlay: "oklch(0.230 0.018 270 / 0.7)", // #1A1C26
+  overlayText: "oklch(0.680 0.015 270)",
 };
 
 const LIGHT_THEME: Theme = {
-  bg: "oklch(0.987 0.004 301.4)", // neutral-10
-  edge: "oklch(0.412 0.105 295.1 / 0.40)", // #503D7D — softer so thicker lines don’t dominate
-  edgeHighlight: "oklch(0.893 0.071 311.1)", // #EBCFFF — matches hover node
-  nodeExists: "oklch(0.412 0.105 295.1)", // #503D7D — default note
-  nodeGhost: "oklch(0.806 0.006 286.3)", // neutral-200
-  nodeActive: "oklch(0.565 0.130 61.8)", // orange-500
-  nodeHover: "oklch(0.893 0.071 311.1)", // #EBCFFF — hover
-  nodeDrag: "oklch(0.557 0.176 293.4)", // purple-500
-  nodeSearch: "oklch(0.543 0.134 153.2)", // green-500
-  label: "oklch(0.345 0.012 298.8)", // neutral-800
-  labelGhost: "oklch(0.496 0.011 292.6)", // neutral-600
-  labelBg: "oklch(1.000 0.000 89.9 / 0.80)", // neutral-0
-  overlay: "oklch(0.987 0.004 301.4 / 0.7)",
-  overlayText: "oklch(0.496 0.011 292.6)",
+  bg: "oklch(0.973 0.004 286)", // #F7F7FA
+  edge: "oklch(0.650 0.160 245 / 0.35)", // #0091FE
+  edgeHighlight: "oklch(0.650 0.160 245)",
+  nodeExists: "oklch(0.650 0.160 245)",
+  nodeGhost: "oklch(0.880 0.010 286)", // #D9D9E2
+  nodeActive: "oklch(0.670 0.160 60)", // #D97706 paused
+  nodeHover: "oklch(0.720 0.140 245)",
+  nodeDrag: "oklch(0.550 0.160 290)", // #7C5CDB fresh
+  nodeSearch: "oklch(0.550 0.130 150)", // #1F8A4C success
+  label: "oklch(0.180 0.020 270)", // #0F131E
+  labelGhost: "oklch(0.550 0.015 270)", // #737684
+  labelBg: "oklch(1.000 0.000 0 / 0.80)",
+  overlay: "oklch(0.973 0.004 286 / 0.7)",
+  overlayText: "oklch(0.550 0.015 270)",
 };
 
 function nodeRadius(n: PhysNode): number {
@@ -738,7 +738,7 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
 
       {/* Search bar */}
       {showSearch && (
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-[var(--gl-border-radius-default)] border border-[var(--gl-border-color-strong)] bg-[var(--gl-background-color-overlap)] px-3 py-1.5 shadow-md w-56">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--popover)] px-3 py-1.5 shadow-md w-56">
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none" className="shrink-0 text-muted-foreground">
             <circle cx="5" cy="5" r="3.5" stroke="currentColor" strokeWidth="1.4"/>
             <path d="M8 8l2.5 2.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
@@ -765,10 +765,10 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
         <button
           onClick={toggleSearch}
           title="Search nodes (F)"
-          className={`flex h-6 w-6 items-center justify-center rounded-[var(--gl-border-radius-sm)] border text-[10px] transition-colors ${
+          className={`flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border text-[10px] transition-colors ${
             showSearch
-              ? "border-[var(--gl-border-color-default)] bg-[var(--gl-background-color-strong)] text-foreground"
-              : "border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-overlap)] text-muted-foreground hover:bg-[var(--gl-background-color-strong)] hover:text-foreground"
+              ? "border-[var(--border)] bg-[var(--muted)] text-foreground"
+              : "border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground"
           }`}
         >
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
@@ -781,41 +781,41 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
         <button
           onClick={() => setShowAllLabels((s) => !s)}
           title="Toggle all labels"
-          className={`flex h-6 w-6 items-center justify-center rounded-[var(--gl-border-radius-sm)] border text-[10px] font-mono transition-colors ${
+          className={`flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border text-[10px] font-mono transition-colors ${
             showAllLabels
-              ? "border-[var(--gl-border-color-default)] bg-[var(--gl-background-color-strong)] text-foreground"
-              : "border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-overlap)] text-muted-foreground hover:bg-[var(--gl-background-color-strong)] hover:text-foreground"
+              ? "border-[var(--border)] bg-[var(--muted)] text-foreground"
+              : "border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground"
           }`}
         >
           T
         </button>
 
-        <div className="my-0.5 border-t border-[var(--gl-border-color-subtle)]" />
+        <div className="my-0.5 border-t border-[var(--border)]" />
 
         {/* Zoom in */}
         <button onClick={zoomIn} title="Zoom in"
-          className="flex h-6 w-6 items-center justify-center rounded-[var(--gl-border-radius-sm)] border border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-overlap)] text-muted-foreground hover:bg-[var(--gl-background-color-strong)] hover:text-foreground transition-colors text-sm font-light">
+          className="flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground transition-colors text-sm font-light">
           +
         </button>
         {/* Zoom out */}
         <button onClick={zoomOut} title="Zoom out"
-          className="flex h-6 w-6 items-center justify-center rounded-[var(--gl-border-radius-sm)] border border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-overlap)] text-muted-foreground hover:bg-[var(--gl-background-color-strong)] hover:text-foreground transition-colors text-sm font-light">
+          className="flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground transition-colors text-sm font-light">
           −
         </button>
         {/* Reset view */}
         <button onClick={resetView} title="Reset view"
-          className="flex h-6 w-6 items-center justify-center rounded-[var(--gl-border-radius-sm)] border border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-overlap)] text-muted-foreground hover:bg-[var(--gl-background-color-strong)] hover:text-foreground transition-colors">
+          className="flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground transition-colors">
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
             <path d="M2 6a4 4 0 1 1 1 2.8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
             <path d="M2 9V6h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
 
-        <div className="my-0.5 border-t border-[var(--gl-border-color-subtle)]" />
+        <div className="my-0.5 border-t border-[var(--border)]" />
 
         {/* Unpin all */}
         <button onClick={unpinAll} title="Release pinned nodes"
-          className="flex h-6 w-6 items-center justify-center rounded-[var(--gl-border-radius-sm)] border border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-overlap)] text-muted-foreground hover:bg-[var(--gl-background-color-strong)] hover:text-foreground transition-colors">
+          className="flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground transition-colors">
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
             <circle cx="6" cy="6" r="4" stroke="currentColor" strokeWidth="1.3"/>
             <path d="M6 4v2.5l1.5 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
@@ -825,14 +825,14 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
 
       {/* Hover tooltip */}
       {hoverNode && !dragId && (
-        <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[var(--gl-border-radius-default)] border border-[var(--gl-border-color-strong)] bg-[var(--gl-background-color-overlap)] px-3 py-1 text-xs font-mono text-foreground shadow-sm">
+        <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[var(--radius)] border border-[var(--border)] bg-[var(--popover)] px-3 py-1 text-xs font-mono text-foreground shadow-sm">
           {hoverNode.label}
         </div>
       )}
 
       {/* Drag hint */}
       {dragId && (
-        <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[var(--gl-border-radius-default)] border border-[var(--gl-border-color-subtle)] bg-[var(--gl-background-color-overlap)] px-3 py-1 text-xs font-mono text-muted-foreground shadow-sm">
+        <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[var(--radius)] border border-[var(--border)] bg-[var(--popover)] px-3 py-1 text-xs font-mono text-muted-foreground shadow-sm">
           drag to throw · double-click to pin
         </div>
       )}

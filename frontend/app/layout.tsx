@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist_Mono, Roboto } from "next/font/google";
+import "material-symbols/outlined.css";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { MotionProvider } from "@/components/motion-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-sans",
+});
+
+const fontMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   title: "Digital Garden",
@@ -19,8 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", inter.variable)} suppressHydrationWarning>
-      <body className="antialiased">
+    <html
+      lang="en"
+      className={cn("antialiased font-sans", roboto.variable, fontMono.variable)}
+      suppressHydrationWarning
+    >
+      <body>
         <ThemeProvider>
           <MotionProvider>
             <TooltipProvider>

@@ -55,7 +55,7 @@ export function InlineInput({ defaultValue = "", placeholder, selectEnd, onConfi
       }}
       onBlur={cancel}
       placeholder={placeholder}
-      className="h-[22px] min-w-0 flex-1 rounded-[var(--gl-border-radius-sm)] bg-[var(--gl-control-background-color-default)] px-1.5 text-[11px] text-foreground outline-none border border-[var(--gl-control-border-color-default)] focus:border-[var(--gl-control-border-color-focus)] focus:ring-2 focus:ring-[var(--gl-focus-ring-outer-color)] disabled:opacity-40"
+      className="h-[22px] min-w-0 flex-1 rounded-[var(--radius-sm)] bg-[var(--card)] px-1.5 text-[11px] text-foreground outline-none border border-[var(--input)] focus:border-[var(--ring)] focus:ring-2 focus:ring-[var(--ring)] disabled:opacity-40"
     />
   );
 }

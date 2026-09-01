@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, FilePlus2, FolderPlus, MoreHorizontal, Pencil, Trash2, Upload } from "lucide-react";
+import { Icon } from "@/components/icon";
 import { getMediaType, ALL_MEDIA_EXTS, getExt } from "@/lib/media-utils";
 import { uploadFile } from "@/lib/api";
 import {
@@ -218,7 +218,7 @@ export function FileTreeNode({
     }
   }
 
-  const itemClass = "gap-1.5 py-1 text-[11px] [&_svg:not([class*='size-'])]:size-3";
+  const itemClass = "gap-1.5 py-1 text-[11px]";
   const uploadInputRef = useRef<HTMLInputElement>(null);
 
   async function handleUploadToFolder(files: FileList | null) {
@@ -242,26 +242,26 @@ export function FileTreeNode({
         {!isFile && (
           <>
             <Item className={itemClass} onSelect={() => openNewItem("file")}>
-              <FilePlus2 /> New Note Here
+              <Icon name="note_add" size={16} /> New Note Here
             </Item>
             <Item className={itemClass} onSelect={() => openNewItem("folder")}>
-              <FolderPlus /> New Folder Here
+              <Icon name="create_new_folder" size={16} /> New Folder Here
             </Item>
             <Item
               className={itemClass}
               onSelect={() => setTimeout(() => uploadInputRef.current?.click(), 0)}
             >
-              <Upload /> Upload Files Here
+              <Icon name="upload" size={16} /> Upload Files Here
             </Item>
             <Sep />
           </>
         )}
         <Item className={itemClass} onSelect={() => setIsRenaming(true)}>
-          <Pencil /> Rename
+          <Icon name="edit" size={16} /> Rename
         </Item>
         <Sep />
         <Item className={itemClass} variant="destructive" onSelect={() => setShowDelete(true)}>
-          <Trash2 /> Delete
+          <Icon name="delete" size={16} /> Delete
         </Item>
       </>
     );
@@ -315,7 +315,7 @@ export function FileTreeNode({
                   : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground",
                 isEmpty && "opacity-60",
                 isDragging && "opacity-40",
-                isDragOver && "bg-sidebar-accent ring-1 ring-inset ring-[var(--gl-color-blue-500)]/50"
+                isDragOver && "bg-sidebar-accent ring-1 ring-inset ring-[var(--primary)]/50"
               )}
               style={{ height: ROW_HEIGHT, paddingLeft }}
               onClick={() => {
@@ -328,13 +328,13 @@ export function FileTreeNode({
               </span>
 
               {!isFile && (
-                <ChevronDown
+                <Icon
+                  name="expand_more"
                   className={cn(
                     "ml-2 shrink-0 text-muted-foreground/45 transition-transform duration-150",
                     !isOpen && "-rotate-90"
                   )}
-                  size={14}
-                  strokeWidth={1.75}
+                  size={16}
                 />
               )}
 
@@ -347,7 +347,7 @@ export function FileTreeNode({
                     )}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <MoreHorizontal size={12} />
+                    <Icon name="more_horiz" size={16} />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent

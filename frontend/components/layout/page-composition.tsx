@@ -4,9 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Pajamas page composition primitives.
- * Spec: https://design.gitlab.com/product-foundations/layout
- *
+ * Atlas page composition primitives.
  * Application chrome (sidebar + top bar) + up to three panels:
  * static (primary context), dynamic (optional supporting), AI (collapsible).
  */

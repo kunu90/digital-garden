@@ -1,8 +1,6 @@
 /**
- * Pajamas page composition foundations
- * Spec: https://design.gitlab.com/product-foundations/layout
- * Desktop layout metrics locked to Figma Digital Garden
- * (https://www.figma.com/design/uEjjbgOF8We9ivvDLPXCSW?node-id=20-2)
+ * Atlas page composition
+ * Tokens from kunu90/atlas @ 945072e. Panel structure unchanged.
  *
  * Layers:
  * 1. Application chrome — constant (full-width top bar + left sidebar)
@@ -17,44 +15,44 @@
   --dg-sidebar-width: 16rem; /* 256px — PageBody sidebar column */
   --dg-ai-panel-width: 22.5rem;
   --dg-panel-gap: 0;
-  /* Outlines — Pajamas border roles */
-  --dg-border-section: var(--gl-border-color-section);
-  --dg-border-default: var(--gl-border-color-default);
-  --dg-border-subtle: var(--gl-border-color-subtle);
-  --dg-border-strong: var(--gl-border-color-strong);
-  /* Surfaces — page matches Figma warm canvas #fbfaf9 */
-  --dg-surface-page: #fbfaf9;
+  /* Outlines — Atlas hairline borders */
+  --dg-border-section: var(--border);
+  --dg-border-default: var(--border);
+  --dg-border-subtle: var(--border);
+  --dg-border-strong: var(--border);
+  /* Surfaces — Atlas canvas #F7F7FA */
+  --dg-surface-page: #f7f7fa;
   --dg-surface-sidebar: transparent;
-  --dg-surface-section: var(--gl-background-color-section);
-  --dg-surface-default: var(--gl-background-color-default);
-  --dg-surface-strong: var(--gl-background-color-strong);
-  /* Tree selection — warm beige from Figma */
-  --dg-tree-selected-bg: #f5f2ee;
-  --dg-tree-selected-fg: var(--gl-text-color-default);
+  --dg-surface-section: var(--card);
+  --dg-surface-default: var(--card);
+  --dg-surface-strong: var(--muted);
+  /* Tree selection — Atlas sidebar tint */
+  --dg-tree-selected-bg: #efeff5;
+  --dg-tree-selected-fg: var(--foreground);
   /* Workspace card insets (Figma ChromeMain: pl-8 pr-12 py-12) */
   --dg-workspace-inset-top: 12px;
   --dg-workspace-inset-end: 12px;
   --dg-workspace-inset-bottom: 12px;
   --dg-workspace-inset-start: 8px;
-  --dg-workspace-radius: 8px;
-  --dg-workspace-shadow: 0 1px 8px var(--gl-color-alpha-dark-8);
+  --dg-workspace-radius: 16px;
+  --dg-workspace-shadow: var(--shadow-sm);
   /* Tabs sit above the workspace card (Figma Digital Garden / TabBar) */
   --dg-tabbar-height: 46px;
-  --dg-tabbar-border: #e5e3e0;
-  --dg-tab-divider: #ececef;
-  --dg-tab-active-bg: #f5f2ee;
-  --dg-tab-accent: #6349be;
+  --dg-tabbar-border: var(--border);
+  --dg-tab-divider: var(--border);
+  --dg-tab-active-bg: var(--muted);
+  --dg-tab-accent: var(--primary);
 }
 
 .dark {
-  --dg-surface-page: var(--gl-background-color-subtle);
+  --dg-surface-page: var(--background);
   --dg-surface-sidebar: transparent;
-  --dg-tree-selected-bg: var(--gl-color-blue-900);
-  --dg-tree-selected-fg: var(--gl-color-blue-100);
-  --dg-tabbar-border: var(--gl-border-color-default);
-  --dg-tab-divider: var(--gl-border-color-subtle);
-  --dg-tab-active-bg: var(--gl-color-purple-900);
-  --dg-tab-accent: var(--gl-color-purple-400);
+  --dg-tree-selected-bg: var(--muted);
+  --dg-tree-selected-fg: var(--foreground);
+  --dg-tabbar-border: var(--border);
+  --dg-tab-divider: var(--border);
+  --dg-tab-active-bg: var(--muted);
+  --dg-tab-accent: var(--primary);
 }
 
 /* ── Page (viewport) ─────────────────────────────────────────── */
@@ -68,7 +66,7 @@
   width: 100%;
   overflow: hidden;
   background: var(--dg-surface-page);
-  color: var(--gl-text-color-default);
+  color: var(--foreground);
 }
 
 /* Row below the global top bar: notes sidebar + workspace card */
@@ -93,22 +91,22 @@
 
 .dg-skip-link {
   position: absolute;
-  left: var(--gl-spacing-scale-3);
-  top: var(--gl-spacing-scale-3);
+  left: 0.5rem;
+  top: 0.5rem;
   z-index: 100;
-  padding: var(--gl-spacing-scale-2) var(--gl-spacing-scale-4);
-  border-radius: var(--gl-border-radius-default);
-  background: var(--gl-background-color-overlap);
-  color: var(--gl-text-color-default);
-  border: 1px solid var(--gl-border-color-strong);
-  box-shadow: 0 var(--gl-spacing-scale-1) var(--gl-spacing-scale-3) var(--gl-color-alpha-dark-16);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius);
+  background: var(--popover);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
   transform: translateY(-200%);
   transition: transform 0.15s ease;
 }
 
 .dg-skip-link:focus {
   transform: translateY(0);
-  outline: 2px solid var(--gl-focus-ring-outer-color);
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
 
@@ -118,7 +116,7 @@
   flex-shrink: 0;
   z-index: 20;
   background: var(--dg-surface-sidebar);
-  color: var(--gl-text-color-default);
+  color: var(--foreground);
 }
 
 /* Notes sidebar — flat on page surface, no card chrome */
@@ -148,8 +146,7 @@
 }
 
 /**
- * Workspace shell — single 8px rounded surface for tabs + writing area.
- * Keeps corner radius when notes/tabs are open (Figma WorkspaceCard radius).
+ * Workspace shell — 16px Atlas card radius for tabs + writing area.
  */
 .dg-workspace-shell {
   display: flex;
@@ -189,7 +186,7 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gl-spacing-scale-3);
+  gap: 0.5rem;
   padding-inline: 12px;
   border-bottom: none;
   background: transparent;
@@ -204,13 +201,13 @@
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.5;
-  color: var(--gl-text-color-default);
+  color: var(--foreground);
   letter-spacing: -0.01em;
 }
 
 .dg-topbar__brand-icon {
   flex-shrink: 0;
-  color: var(--gl-text-color-link);
+  color: var(--primary);
 }
 
 .dg-topbar__nav {
@@ -269,7 +266,7 @@
 .dg-panel-splitter {
   position: relative;
   z-index: 10;
-  width: var(--gl-spacing-scale-px);
+  width: 1px;
   flex-shrink: 0;
   cursor: col-resize;
   background: var(--dg-border-default);
@@ -278,14 +275,14 @@
 
 .dg-panel-splitter:hover,
 .dg-panel-splitter:focus-visible {
-  background: var(--gl-color-blue-500);
+  background: var(--primary);
 }
 
 .dg-panel-splitter::after {
   content: "";
   position: absolute;
   inset-block: 0;
-  inset-inline: calc(var(--gl-spacing-scale-2) * -1);
+  inset-inline: calc(0.25rem * -1);
 }
 
 /* On narrow viewports, AI panel overlays (responsive panel, not drawer) */
@@ -300,40 +297,40 @@
     inset-inline-end: 0;
     z-index: 30;
     border-left: 1px solid var(--dg-border-strong);
-    box-shadow: -4px 0 24px var(--gl-color-alpha-dark-16);
+    box-shadow: var(--shadow-lg);
   }
 }
 
 /* ── Content containers (use sparingly inside panels) ───────── */
 
 .dg-container {
-  border-radius: var(--gl-border-radius-default);
+  border-radius: var(--radius);
 }
 
 .dg-container--default {
-  background: var(--gl-background-color-default);
-  border: 1px solid var(--gl-border-color-default);
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 
 .dg-container--subtle {
-  background: var(--gl-background-color-subtle);
-  border: 1px solid var(--gl-border-color-subtle);
+  background: var(--background);
+  border: 1px solid var(--border);
 }
 
 .dg-container--strong {
-  background: var(--gl-background-color-strong);
-  border: 1px solid var(--gl-border-color-strong);
+  background: var(--muted);
+  border: 1px solid var(--border);
 }
 
 .dg-container--section {
-  background: var(--gl-background-color-section);
-  border: 1px solid var(--gl-border-color-section);
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 
 .dg-container--overlap {
-  background: var(--gl-background-color-overlap);
-  border: 1px solid var(--gl-border-color-strong);
-  box-shadow: 0 var(--gl-spacing-scale-1) var(--gl-spacing-scale-4) var(--gl-color-alpha-dark-16);
+  background: var(--popover);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
 }
 
 /* ── Tab strip (above workspace card — Figma TabBar 16:2) ───── */
@@ -382,7 +379,7 @@
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 18px;
-  color: var(--gl-text-color-default);
+  color: var(--foreground);
   background: transparent;
   transition: background-color 0.12s ease, color 0.12s ease;
 }
@@ -392,7 +389,7 @@
 }
 
 .dg-tab[data-active="true"] {
-  color: var(--gl-text-color-default);
+  color: var(--foreground);
   background: var(--dg-tab-active-bg);
 }
 
@@ -419,7 +416,7 @@
   justify-content: center;
   border-radius: 2px;
   opacity: 0;
-  color: var(--gl-text-color-subtle);
+  color: var(--muted-foreground);
   transition: opacity 0.12s ease, background-color 0.12s ease;
 }
 

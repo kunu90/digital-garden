@@ -600,10 +600,10 @@ export function tableInsertNew(view: EditorView, cols = 3, rows = 2): void {
 export function tableTheme(_isDark: boolean) {
   return EditorView.theme({
     ".cm-table-pipe": {
-      color: "var(--gl-text-color-disabled)",
+      color: "var(--muted-foreground)",
     },
     ".cm-table-sep .cm-table-pipe": {
-      color: "var(--gl-text-color-subtle)",
+      color: "var(--muted-foreground)",
     },
     ".cm-table-sep": { opacity: "0.55" },
     ".cm-table-header-row": { fontWeight: "600" },

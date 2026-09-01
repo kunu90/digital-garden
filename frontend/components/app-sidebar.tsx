@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { Icon } from "@/components/icon";
 import {
   Sidebar,
   SidebarContent,
@@ -24,7 +24,7 @@ function CollapseSidebarButton() {
       title="Collapse sidebar (⌘B)"
       className="flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
     >
-      <ArrowLeft size={16} className="shrink-0 opacity-80" aria-hidden />
+      <Icon name="arrow_back" size={16} className="shrink-0 opacity-80" />
       <span>Collapse sidebar</span>
     </button>
   );
@@ -40,7 +40,7 @@ export function AppSidebar() {
       <SidebarContent className="pt-1">
         <FileTree />
       </SidebarContent>
-      <SidebarFooter className="border-t border-[var(--gl-border-color-subtle)] p-2">
+      <SidebarFooter className="border-t border-border p-2">
         <CollapseSidebarButton />
       </SidebarFooter>
     </Sidebar>

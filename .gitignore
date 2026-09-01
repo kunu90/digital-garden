@@ -22,6 +22,9 @@ node_modules/
 frontend/node_modules/
 frontend/.next/
 
+# Vendored Atlas clone (local only; tokens/primitives copied into frontend/)
+.atlas-vendor-tmp/
+
 # Logs & runtime artifacts
 *.log
 backend.log

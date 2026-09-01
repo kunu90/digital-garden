@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FolderOpen, Sprout } from "lucide-react";
+import { Icon } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -37,7 +37,7 @@ export function Onboarding({ onConfigure }: Props) {
     <div className="flex h-full w-full items-center justify-center bg-background">
       <div className="flex max-w-sm flex-col items-center gap-6 text-center">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted">
-          <Sprout className="h-8 w-8 text-muted-foreground" />
+          <Icon name="potted_plant" size={24} className="text-muted-foreground" />
         </div>
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-semibold tracking-tight">Welcome to your Digital Garden</h1>
@@ -47,7 +47,7 @@ export function Onboarding({ onConfigure }: Props) {
         </div>
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-3">
           <div className="flex gap-2">
-            <FolderOpen className="mt-2.5 h-4 w-4 shrink-0 text-muted-foreground" />
+            <Icon name="folder_open" size={16} className="mt-2.5 shrink-0 text-muted-foreground" />
             <Input
               value={path}
               onChange={(e) => setPath(e.target.value)}

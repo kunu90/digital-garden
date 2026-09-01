@@ -1,0 +1,216 @@
+/**
+ * App semantic tokens bridged to Atlas.
+ * Dark mode inherits from :root / .dark in globals.css.
+ */
+
+:root {
+  /* ── Chat panel ───────────────────────────────────────────── */
+  --chat-bg: var(--background);
+  --chat-header-bg: var(--card);
+  --chat-header-text: var(--muted-foreground);
+  --chat-border: var(--border);
+  --chat-accent: var(--primary);
+  --chat-btn-hover: var(--muted);
+  --chat-btn-text: var(--muted-foreground);
+  --chat-scrollbar: var(--border);
+  --chat-placeholder: var(--muted-foreground);
+  --chat-input-bg: var(--background);
+  --chat-input-border: var(--border);
+  --chat-input-field-bg: var(--card);
+  --chat-input-text: var(--foreground);
+  --chat-send-bg: var(--primary);
+  --chat-send-icon: var(--primary-foreground);
+  --chat-stop-bg: var(--muted);
+  --chat-stop-icon: var(--foreground);
+  --chat-hint: var(--muted-foreground);
+  --chat-context-bg: color-mix(in srgb, var(--primary) 8%, var(--card));
+  --chat-context-text: var(--primary);
+
+  --user-bubble-bg: var(--primary);
+  --user-text: var(--primary-foreground);
+
+  --ai-avatar-bg: var(--primary);
+  --ai-avatar-text: var(--primary-foreground);
+
+  --assistant-text: var(--foreground);
+  --assistant-heading: var(--foreground);
+  --assistant-strong: var(--foreground);
+  --blockquote-text: var(--muted-foreground);
+  --blockquote-border: var(--border);
+  --link-text: var(--primary);
+  --link-hover: var(--primary-hover);
+  --divider: var(--border);
+  --cursor-color: var(--primary);
+
+  --code-bg: var(--muted);
+  --code-text: var(--primary-hover);
+  --code-block-bg: var(--background);
+  --code-block-text: var(--foreground);
+
+  --thinking-bg: color-mix(in srgb, var(--primary) 8%, var(--card));
+  --thinking-bg-hover: color-mix(in srgb, var(--primary) 12%, var(--card));
+  --thinking-content-bg: color-mix(in srgb, var(--primary) 8%, var(--card));
+  --thinking-border: color-mix(in srgb, var(--primary) 25%, var(--border));
+  --thinking-icon: var(--primary);
+  --thinking-label: var(--primary);
+  --thinking-text: var(--foreground);
+
+  --tool-bg: var(--background);
+  --tool-bg-hover: var(--muted);
+  --tool-border: var(--border);
+  --tool-default-border: var(--border);
+  --tool-done-border: color-mix(in srgb, var(--success) 25%, var(--border));
+  --tool-denied-border: color-mix(in srgb, var(--destructive) 25%, var(--border));
+  --tool-pending-border: color-mix(in srgb, var(--attention) 25%, var(--border));
+  --tool-detail-bg: var(--muted);
+  --tool-label: var(--muted-foreground);
+  --tool-code: var(--foreground);
+  --tool-summary: var(--muted-foreground);
+  --tool-chevron: var(--muted-foreground);
+
+  --tool-read: var(--primary);
+  --tool-edit: var(--success);
+  --tool-search: var(--paused);
+  --tool-web: var(--primary);
+  --tool-memory: var(--fresh);
+
+  --tool-pending: var(--paused);
+  --tool-running: var(--primary);
+  --tool-done: var(--success);
+  --tool-denied: var(--destructive);
+
+  --tool-approval-bg: color-mix(in srgb, var(--attention) 8%, var(--card));
+  --tool-approval-text: var(--attention);
+  --approve-bg: var(--success);
+  --approve-text: var(--primary-foreground);
+  --approve-bg-hover: color-mix(in srgb, var(--success) 80%, black);
+  --deny-bg: var(--muted);
+  --deny-text: var(--foreground);
+  --deny-bg-hover: var(--accent);
+
+  --empty-icon-bg: color-mix(in srgb, var(--primary) 12%, var(--card));
+  --empty-title: var(--foreground);
+  --empty-subtitle: var(--muted-foreground);
+  --suggestion-text: var(--muted-foreground);
+  --suggestion-border: var(--border);
+  --suggestion-hover-border: var(--primary);
+  --suggestion-hover-bg: color-mix(in srgb, var(--primary) 8%, var(--card));
+
+  --diff-border: var(--border);
+  --diff-header-bg: color-mix(in srgb, var(--primary) 8%, var(--card));
+  --diff-header-text: var(--primary);
+  --diff-add-bg: color-mix(in srgb, var(--success) 8%, var(--card));
+  --diff-add-text: var(--success);
+  --diff-remove-bg: color-mix(in srgb, var(--destructive) 8%, var(--card));
+  --diff-remove-text: var(--destructive);
+  --diff-context-bg: var(--card);
+  --diff-context-text: var(--foreground);
+
+  --wikilink-fg: var(--primary);
+  --wikilink-bg: color-mix(in srgb, var(--primary) 8%, white);
+  --wikilink-hover-bg: color-mix(in srgb, var(--primary) 16%, white);
+}
+
+.dark {
+  --wikilink-bg: color-mix(in srgb, var(--primary) 16%, var(--card));
+  --wikilink-hover-bg: color-mix(in srgb, var(--primary) 24%, var(--card));
+}
+
+.inline-ai-bar,
+.inline-ai-card {
+  background: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+.inline-ai-bar {
+  border-radius: var(--radius);
+}
+
+.inline-ai-send {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 0.375rem;
+}
+
+.inline-ai-icon,
+.inline-ai-spin {
+  color: var(--primary);
+}
+
+.diff-line--remove {
+  background: color-mix(in srgb, var(--destructive) 8%, var(--card));
+  color: var(--destructive);
+}
+.diff-line--remove .diff-line-gutter {
+  color: var(--destructive);
+}
+
+.diff-line--add {
+  background: color-mix(in srgb, var(--success) 8%, var(--card));
+  color: var(--success);
+}
+.diff-line--add .diff-line-gutter {
+  color: var(--success);
+}
+
+.inline-ai-card-accept {
+  background: var(--success);
+  color: var(--primary-foreground);
+  border-radius: 0.375rem;
+}
+.inline-ai-card-accept:hover {
+  background: color-mix(in srgb, var(--success) 80%, black);
+}
+
+.inline-ai-card-reject {
+  border-radius: 0.375rem;
+  border-color: var(--border);
+}
+
+.cmd-overlay {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.cmd-panel {
+  background: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-xl);
+}
+
+.cmd-esc-hint,
+.cmd-footer-kbd {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  color: var(--muted-foreground);
+}
+
+.cmd-item--selected {
+  background: var(--muted);
+}
+
+.cmd-match {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.dg-media-toolbar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.125rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  padding: 0.25rem 0.5rem;
+}
+
+.dg-media-stage {
+  background: #0f131e;
+}
+
+.dg-media-stage--light {
+  background: var(--background);
+}

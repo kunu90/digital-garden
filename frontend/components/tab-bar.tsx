@@ -1,6 +1,6 @@
 "use client";
 
-import { GitFork, X } from "lucide-react";
+import { Icon } from "@/components/icon";
 import { GRAPH_TAB_PATH } from "@/context/workspace-context";
 
 type Props = {
@@ -33,7 +33,7 @@ export function TabBar({ tabs, activeIndex, onSelect, onClose }: Props) {
             title={isGraph ? "Graph view" : path}
           >
             {isActive && <div className="dg-tab__accent" aria-hidden />}
-            {isGraph && <GitFork size={11} className="shrink-0 opacity-70" />}
+            {isGraph && <Icon name="account_tree" size={16} className="shrink-0 opacity-70" />}
             <span className="truncate">{label}</span>
             <button
               type="button"
@@ -44,7 +44,7 @@ export function TabBar({ tabs, activeIndex, onSelect, onClose }: Props) {
               }}
               title="Close tab"
             >
-              <X size={12} strokeWidth={1.75} />
+              <Icon name="close" size={16} />
             </button>
           </div>
         );
