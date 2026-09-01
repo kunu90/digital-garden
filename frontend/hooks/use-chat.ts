@@ -20,6 +20,7 @@ export type ToolCallState = {
   result?: string;
   requestId?: string;
   awaitingApproval?: boolean;
+  resolvedAt?: Date;
 };
 
 export type MessageBlock =
@@ -176,7 +177,14 @@ export function useChat(onFileEdit?: (path: string) => void) {
               if (event.name === "edit_file") {
                 editedPath = b.tool.input.path as string | undefined;
               }
-              return { ...b, tool: { ...b.tool, status: "done" as const, result: event.content } };
+              return {
+                ...b,
+                tool: {
+                  ...b.tool,
+                  status: "done" as const,
+                  result: event.content,
+                },
+              };
             }
             return b;
           });
@@ -191,7 +199,15 @@ export function useChat(onFileEdit?: (path: string) => void) {
         updateBlocks((blocks) =>
           blocks.map((b) =>
             b.kind === "tool_call" && b.tool.requestId === event.request_id
-              ? { ...b, tool: { ...b.tool, status: "denied", awaitingApproval: false } }
+              ? {
+                  ...b,
+                  tool: {
+                    ...b.tool,
+                    status: "denied",
+                    awaitingApproval: false,
+                    resolvedAt: b.tool.resolvedAt ?? new Date(),
+                  },
+                }
               : b
           )
         );
@@ -294,7 +310,15 @@ export function useChat(onFileEdit?: (path: string) => void) {
         ...m,
         blocks: m.blocks.map((b) =>
           b.kind === "tool_call" && b.tool.requestId === requestId
-            ? { ...b, tool: { ...b.tool, status: "approved" as const, awaitingApproval: false } }
+            ? {
+                ...b,
+                tool: {
+                  ...b.tool,
+                  status: "approved" as const,
+                  awaitingApproval: false,
+                  resolvedAt: new Date(),
+                },
+              }
             : b
         ),
       })),
@@ -309,7 +333,15 @@ export function useChat(onFileEdit?: (path: string) => void) {
         ...m,
         blocks: m.blocks.map((b) =>
           b.kind === "tool_call" && b.tool.requestId === requestId
-            ? { ...b, tool: { ...b.tool, status: "denied" as const, awaitingApproval: false } }
+            ? {
+                ...b,
+                tool: {
+                  ...b.tool,
+                  status: "denied" as const,
+                  awaitingApproval: false,
+                  resolvedAt: new Date(),
+                },
+              }
             : b
         ),
       })),
@@ -396,7 +428,6 @@ export function useChat(onFileEdit?: (path: string) => void) {
           // new session id is fine
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

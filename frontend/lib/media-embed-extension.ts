@@ -236,7 +236,7 @@ const mediaEmbedTheme = EditorView.baseTheme({
     borderRadius: "var(--radius)",
   },
   ".cm-media-embed__label": {
-    fontSize: "11px",
+    fontSize: "0.75rem",
     color: "var(--muted-foreground)",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -266,7 +266,7 @@ const mediaEmbedTheme = EditorView.baseTheme({
     border: "none",
   },
   ".cm-media-embed__error": {
-    fontSize: "12px",
+    fontSize: "0.75rem",
     color: "var(--destructive)",
     padding: "6px 0",
     display: "block",

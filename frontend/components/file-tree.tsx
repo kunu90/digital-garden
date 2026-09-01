@@ -60,7 +60,7 @@ function SearchResult({
     <button
       onClick={onSelect}
       className={cn(
-        "w-full cursor-pointer rounded-sm px-2.5 py-1.5 text-left text-xs text-muted-foreground hover:bg-sidebar-accent hover:text-foreground",
+        "w-full cursor-pointer rounded-sm px-2.5 py-1.5 text-left text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-foreground",
         isActive && "bg-[var(--dg-tree-selected-bg)] font-medium text-[var(--dg-tree-selected-fg)]"
       )}
     >
@@ -68,7 +68,7 @@ function SearchResult({
         <span className="truncate">{highlightMatch(node.type === "file" && node.name.endsWith(".md") ? node.name.slice(0, -3) : node.name, query)}</span>
       </div>
       {parentPath && (
-        <span className="mt-0.5 block truncate text-[11px] text-muted-foreground/45">{parentPath}</span>
+        <span className="mt-0.5 block truncate text-xs text-muted-foreground/45">{parentPath}</span>
       )}
     </button>
   );
@@ -80,10 +80,10 @@ function EmptyState() {
       <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-muted text-muted-foreground">
         <Icon name="folder" size={16} />
       </div>
-      <p className="text-center text-xs leading-relaxed text-muted-foreground">
+      <p className="text-center text-sm leading-relaxed text-muted-foreground">
         No notes yet.{" "}
         <span className="inline-flex items-center gap-0.5">
-          Click <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 text-[10px]">+</kbd> to create one.
+          Click <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 text-xs">+</kbd> to create one.
         </span>
       </p>
     </div>
@@ -260,7 +260,7 @@ export function FileTree() {
     >
       {/* Header */}
       <div className="mb-1 flex items-center justify-between px-3 pt-3">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.025em] text-muted-foreground">
+        <span className="text-xs font-semibold uppercase tracking-[0.025em] text-muted-foreground">
           Notes
         </span>
         <div className="flex items-center gap-0.5">
@@ -280,14 +280,14 @@ export function FileTree() {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="bottom" align="end" className="min-w-[140px]" onCloseAutoFocus={(e) => e.preventDefault()}>
-              <DropdownMenuItem className="gap-1.5 py-1 text-[11px]" onSelect={() => setPendingNew("file")}>
+              <DropdownMenuItem className="gap-1.5 py-1" onSelect={() => setPendingNew("file")}>
                 <Icon name="note_add" size={16} /> New Note
               </DropdownMenuItem>
-              <DropdownMenuItem className="gap-1.5 py-1 text-[11px]" onSelect={() => setPendingNew("folder")}>
+              <DropdownMenuItem className="gap-1.5 py-1" onSelect={() => setPendingNew("folder")}>
                 <Icon name="create_new_folder" size={16} /> New Folder
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="gap-1.5 py-1 text-[11px]" onSelect={() => setTimeout(() => uploadInputRef.current?.click(), 0)}>
+              <DropdownMenuItem className="gap-1.5 py-1" onSelect={() => setTimeout(() => uploadInputRef.current?.click(), 0)}>
                 <Icon name="upload" size={16} /> Upload Files
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -320,7 +320,7 @@ export function FileTree() {
           onFocus={() => setIsSearchFocused(true)}
           onBlur={() => setIsSearchFocused(false)}
           placeholder="Filter notes…"
-          className="h-7 w-full rounded-sm border border-border bg-background pl-7 pr-7 text-xs text-foreground outline-none placeholder:text-muted-foreground focus:border-[var(--ring)] focus:ring-1 focus:ring-[var(--ring)]"
+          className="h-8 w-full rounded-sm border border-border bg-card pl-7 pr-7 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-[var(--ring)] focus:ring-1 focus:ring-[var(--ring)]"
         />
         {searchQuery && (
           <button
@@ -344,7 +344,7 @@ export function FileTree() {
           </div>
         ) : isSearching ? (
           searchResults.length === 0 ? (
-            <p className="py-6 text-center text-xs text-muted-foreground/40">
+            <p className="py-6 text-center text-sm text-muted-foreground/40">
               No results for &ldquo;{searchQuery}&rdquo;
             </p>
           ) : (
@@ -394,7 +394,7 @@ export function FileTree() {
 
       {/* Drop hint — shown when dragging into the panel */}
       {(isDraggingAny || isExternalDragging) && !isSearching && isRootDragOver && (
-        <div className="pointer-events-none mx-1.5 mt-1 flex h-6 items-center justify-center gap-1.5 rounded-[3px] border border-dashed border-sidebar-primary/50 bg-sidebar-primary/8 text-[10px] text-sidebar-primary">
+        <div className="pointer-events-none mx-1.5 mt-1 flex h-7 items-center justify-center gap-1.5 rounded-[3px] border border-dashed border-sidebar-primary/50 bg-sidebar-primary/8 text-xs text-sidebar-primary">
           {isExternalDragging && !isDraggingAny ? (
             <><Icon name="upload" size={16} /> Drop to upload to root</>
           ) : (

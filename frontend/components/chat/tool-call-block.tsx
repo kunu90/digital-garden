@@ -53,7 +53,7 @@ export function ToolCallBlock({ tool, onApprove, onDeny, activeNotePath }: ToolC
   const inputSummary = formatInputSummary(tool.name, tool.input);
 
   return (
-    <div className={cn("my-1.5 rounded-[3px] overflow-hidden border text-[11px]", getStatusBorderClass(tool.status))}>
+    <div className={cn("my-1.5 rounded-[3px] overflow-hidden border text-xs", getStatusBorderClass(tool.status))}>
       {/* Header row */}
       <button
         onClick={() => setExpanded((e) => !e)}
@@ -104,14 +104,14 @@ export function ToolCallBlock({ tool, onApprove, onDeny, activeNotePath }: ToolC
       {expanded && (
         <div className="border-t border-border bg-background">
           <div className="px-2.5 py-1.5">
-            <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">Input</div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">Input</div>
             <pre className="font-mono text-muted-foreground whitespace-pre overflow-x-auto max-h-32 overflow-y-auto">
               {JSON.stringify(tool.input, null, 2)}
             </pre>
           </div>
           {tool.result && (
             <div className="px-2.5 py-1.5 border-t border-border">
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">Result</div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-1">Result</div>
               <pre className="font-mono text-muted-foreground whitespace-pre overflow-x-auto max-h-36 overflow-y-auto">
                 {tool.result.length > 2000 ? tool.result.slice(0, 2000) + "\n…" : tool.result}
               </pre>
@@ -130,7 +130,7 @@ export function ToolCallBlock({ tool, onApprove, onDeny, activeNotePath }: ToolC
                       setInserting(false);
                     }
                   }}
-                  className="mt-2 flex items-center gap-1 text-[10px] px-2 py-1 rounded-[3px] border border-border hover:bg-accent transition-colors"
+                  className="mt-2 flex items-center gap-1 text-xs px-2 py-1 rounded-[3px] border border-border hover:bg-accent transition-colors"
                 >
                   <FilePlus size={10} />
                   {inserting ? "Inserting…" : "Insert into note"}

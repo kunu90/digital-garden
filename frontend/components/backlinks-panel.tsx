@@ -39,7 +39,7 @@ export function BacklinksPanel({ notePath, onOpenFile }: BacklinksPanelProps) {
 
   return (
     <ContentContainer
-      tone="subtle"
+      tone="default"
       className="shrink-0 rounded-none border-x-0 border-b-0"
       aria-label="Backlinks"
     >
@@ -49,10 +49,10 @@ export function BacklinksPanel({ notePath, onOpenFile }: BacklinksPanelProps) {
         className="flex w-full items-center gap-1.5 px-3 py-2 text-left transition-colors hover:bg-[var(--muted)]"
       >
         <Link2 size={12} className="text-muted-foreground" />
-        <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Backlinks
         </span>
-        <span className="ml-auto text-[11px] tabular-nums text-muted-foreground">
+        <span className="ml-auto text-xs tabular-nums text-muted-foreground">
           {loading ? "…" : backlinks.length}
         </span>
       </button>
@@ -75,11 +75,11 @@ export function BacklinksPanel({ notePath, onOpenFile }: BacklinksPanelProps) {
                 "hover:bg-[var(--muted)]"
               )}
             >
-              <div className="truncate text-xs font-medium text-foreground">
+              <div className="truncate text-sm font-medium text-foreground">
                 {bl.path.replace(/\.md$/, "").split("/").pop()}
               </div>
               {bl.excerpt && (
-                <div className="mt-0.5 line-clamp-2 text-[11px] text-muted-foreground">
+                <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
                   {bl.excerpt}
                 </div>
               )}

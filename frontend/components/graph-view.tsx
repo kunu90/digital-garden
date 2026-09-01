@@ -271,7 +271,7 @@ function drawGraph(
     const showLabel = isActive || isHovered || isDragging || isInSearch || (showAllLabels && n.exists) || (n.exists && scale > 0.8);
     if (showLabel) {
       const label = n.label.length > 24 ? n.label.slice(0, 22) + "…" : n.label;
-      ctx.font = `${Math.max(10, Math.min(13, 10 + scale * 2))}px ui-monospace, monospace`;
+      ctx.font = `${Math.max(12, Math.min(14, 12 + scale * 2))}px ui-monospace, monospace`;
       const metrics = ctx.measureText(label);
       const lx = pos.x, ly = pos.y - r - 5;
       const pad = 4;
@@ -714,7 +714,7 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 px-4 text-center text-muted-foreground">
         <p className="text-sm">No notes yet.</p>
-        <p className="text-xs opacity-60">Use <code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px]">{"[[Note Name]]"}</code> to link notes.</p>
+        <p className="text-xs opacity-60">Use <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">{"[[Note Name]]"}</code> to link notes.</p>
       </div>
     );
   }
@@ -752,7 +752,7 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
             className="flex-1 bg-transparent text-xs font-mono outline-none placeholder:text-muted-foreground/50"
           />
           {searchQuery && (
-            <span className="text-[10px] font-mono text-muted-foreground/70 tabular-nums">
+            <span className="text-xs font-mono text-muted-foreground/70 tabular-nums">
               {searchMatchCount}
             </span>
           )}
@@ -765,7 +765,7 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
         <button
           onClick={toggleSearch}
           title="Search nodes (F)"
-          className={`flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border text-[10px] transition-colors ${
+          className={`flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border text-xs transition-colors ${
             showSearch
               ? "border-[var(--border)] bg-[var(--muted)] text-foreground"
               : "border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground"
@@ -781,7 +781,7 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
         <button
           onClick={() => setShowAllLabels((s) => !s)}
           title="Toggle all labels"
-          className={`flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border text-[10px] font-mono transition-colors ${
+          className={`flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] border text-xs font-mono transition-colors ${
             showAllLabels
               ? "border-[var(--border)] bg-[var(--muted)] text-foreground"
               : "border-[var(--border)] bg-[var(--popover)] text-muted-foreground hover:bg-[var(--muted)] hover:text-foreground"
@@ -838,7 +838,7 @@ export function GraphView({ data, loading, error, activeFilePath, onNodeClick }:
       )}
 
       {/* Stats */}
-      <div className="pointer-events-none absolute bottom-2 right-2.5 flex items-center gap-2.5 font-mono text-[10px] text-muted-foreground/50">
+      <div className="pointer-events-none absolute bottom-2 right-2.5 flex items-center gap-2.5 font-mono text-xs text-muted-foreground/50">
         <span>{data.nodes.length} notes</span>
         <span>{data.edges.length} links</span>
       </div>

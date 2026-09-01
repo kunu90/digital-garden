@@ -20,7 +20,7 @@ export function ChatMessageView({ message, onApprove, onDeny, activeNotePath }: 
         <div className="chat-user-bubble max-w-[85%] rounded-lg px-3 py-2">
           {message.blocks.map((block, i) =>
             block.kind === "text" ? (
-              <p key={i} className="text-[13px] leading-relaxed whitespace-pre-wrap text-[var(--user-text)]">
+              <p key={i} className="text-sm leading-relaxed whitespace-pre-wrap text-[var(--user-text)]">
                 {block.content}
               </p>
             ) : null
@@ -67,7 +67,7 @@ export function ChatMessageView({ message, onApprove, onDeny, activeNotePath }: 
               case "text": {
                 if (!block.content) return null;
                 return (
-                  <div key={i} className="text-[13px] leading-relaxed">
+                  <div key={i} className="text-sm leading-relaxed">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       components={{
@@ -77,7 +77,7 @@ export function ChatMessageView({ message, onApprove, onDeny, activeNotePath }: 
                         code: ({ inline, children, ...props }: { inline?: boolean; children?: React.ReactNode } & React.HTMLAttributes<HTMLElement>) =>
                           inline ? (
                             <code
-                              className="px-1 py-0.5 rounded-[2px] text-[11px] font-mono"
+                              className="px-1 py-0.5 rounded-[2px] text-xs font-mono"
                               style={{ background: "var(--code-bg)", color: "var(--code-text)" }}
                               {...props}
                             >
@@ -85,7 +85,7 @@ export function ChatMessageView({ message, onApprove, onDeny, activeNotePath }: 
                             </code>
                           ) : (
                             <pre
-                              className="my-2 p-2.5 rounded-sm overflow-x-auto text-[11px] font-mono leading-relaxed"
+                              className="my-2 p-2.5 rounded-sm overflow-x-auto text-xs font-mono leading-relaxed"
                               style={{ background: "var(--code-block-bg)", color: "var(--code-block-text)" }}
                             >
                               <code {...props}>{children}</code>
@@ -97,15 +97,15 @@ export function ChatMessageView({ message, onApprove, onDeny, activeNotePath }: 
                         ol: ({ children }) => (
                           <ol className="my-1.5 ml-3.5 list-decimal space-y-0.5 text-foreground">{children}</ol>
                         ),
-                        li: ({ children }) => <li className="text-[13px]">{children}</li>,
+                        li: ({ children }) => <li className="text-sm">{children}</li>,
                         h1: ({ children }) => (
                           <h1 className="text-sm font-semibold mt-3 mb-1.5 text-foreground">{children}</h1>
                         ),
                         h2: ({ children }) => (
-                          <h2 className="text-[13px] font-semibold mt-2.5 mb-1 text-foreground">{children}</h2>
+                          <h2 className="text-sm font-semibold mt-2.5 mb-1 text-foreground">{children}</h2>
                         ),
                         h3: ({ children }) => (
-                          <h3 className="text-[13px] font-medium mt-2 mb-0.5 text-foreground">{children}</h3>
+                          <h3 className="text-sm font-medium mt-2 mb-0.5 text-foreground">{children}</h3>
                         ),
                         blockquote: ({ children }) => (
                           <blockquote className="my-1.5 pl-2.5 border-l-2 border-border italic text-muted-foreground">

@@ -80,7 +80,7 @@ function wikilinkTheme() {
       boxShadow: "var(--shadow-md)",
       overflow: "hidden",
       fontFamily: "var(--font-sans)",
-      fontSize: "13px",
+      fontSize: "0.875rem",
       minWidth: "160px",
     },
     ".cm-tooltip-autocomplete > ul": {
@@ -102,7 +102,7 @@ function wikilinkTheme() {
     },
     ".cm-completionDetail": {
       color: "var(--muted-foreground)",
-      fontSize: "11px",
+      fontSize: "0.75rem",
       marginLeft: "6px",
       fontStyle: "normal",
     },

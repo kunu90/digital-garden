@@ -47,7 +47,7 @@ export function DiffPreview({ filePath, newContent }: DiffPreviewProps) {
 
   if (loading) {
     return (
-      <div className="px-3 py-2 text-[11px] text-[var(--tool-label)] italic">
+      <div className="px-3 py-2 text-xs text-[var(--tool-label)] italic">
         Loading diff…
       </div>
     );
@@ -56,11 +56,11 @@ export function DiffPreview({ filePath, newContent }: DiffPreviewProps) {
   if (isNew) {
     return (
       <div className="px-3 py-2">
-        <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--tool-label)] mb-1.5">
+        <div className="text-xs font-semibold uppercase tracking-wider text-[var(--tool-label)] mb-1.5">
           New file
         </div>
         <pre
-          className="text-[11px] font-mono leading-relaxed whitespace-pre max-h-48 overflow-auto rounded p-2"
+          className="text-xs font-mono leading-relaxed whitespace-pre max-h-48 overflow-auto rounded p-2"
           style={{ background: "var(--diff-add-bg)", color: "var(--diff-add-text)" }}
         >
           {newContent.length > 1500 ? newContent.slice(0, 1500) + "\n…" : newContent}
@@ -71,7 +71,7 @@ export function DiffPreview({ filePath, newContent }: DiffPreviewProps) {
 
   if (hunks && hunks.length === 0) {
     return (
-      <div className="px-3 py-2 text-[11px] text-[var(--tool-label)] italic">
+      <div className="px-3 py-2 text-xs text-[var(--tool-label)] italic">
         No changes detected.
       </div>
     );
@@ -81,14 +81,14 @@ export function DiffPreview({ filePath, newContent }: DiffPreviewProps) {
 
   return (
     <div className="px-3 py-2">
-      <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--tool-label)] mb-1.5">
+      <div className="text-xs font-semibold uppercase tracking-wider text-[var(--tool-label)] mb-1.5">
         Changes
       </div>
       <div className="rounded overflow-hidden border border-[var(--diff-border)] max-h-56 overflow-auto">
         {hunks.map((hunk, hi) => (
           <div key={hi}>
             <div
-              className="px-2 py-0.5 text-[10px] font-mono sticky left-0"
+              className="px-2 py-0.5 text-xs font-mono sticky left-0"
               style={{ background: "var(--diff-header-bg)", color: "var(--diff-header-text)" }}
             >
               @@ -{hunk.old_start} +{hunk.new_start} @@
@@ -96,7 +96,7 @@ export function DiffPreview({ filePath, newContent }: DiffPreviewProps) {
             {hunk.lines.map((line, li) => (
               <div
                 key={li}
-                className="px-2 py-px text-[11px] font-mono whitespace-pre"
+                className="px-2 py-px text-xs font-mono whitespace-pre"
                 style={{
                   background:
                     line.type === "add"

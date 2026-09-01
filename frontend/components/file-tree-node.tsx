@@ -44,7 +44,7 @@ type Props = {
 };
 
 const INDENT = 16;
-const ROW_HEIGHT = 28;
+const ROW_HEIGHT = 32;
 
 function displayName(node: NoteTreeNode) {
   if (node.type === "file" && node.name.endsWith(".md")) {
@@ -218,7 +218,7 @@ export function FileTreeNode({
     }
   }
 
-  const itemClass = "gap-1.5 py-1 text-[11px]";
+  const itemClass = "gap-1.5 py-1";
   const uploadInputRef = useRef<HTMLInputElement>(null);
 
   async function handleUploadToFolder(files: FileList | null) {
@@ -309,7 +309,7 @@ export function FileTreeNode({
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
               className={cn(
-                "group relative flex cursor-pointer items-center rounded-sm pr-2 text-xs leading-none transition-colors",
+                "group relative flex cursor-pointer items-center rounded-sm pr-2 text-sm leading-none transition-colors",
                 isActive
                   ? "bg-[var(--dg-tree-selected-bg)] font-medium text-[var(--dg-tree-selected-fg)]"
                   : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground",
@@ -383,12 +383,12 @@ export function FileTreeNode({
           className="my-0.5 mr-1 rounded-sm border border-destructive/20 bg-destructive/5 p-2 dark:bg-destructive/10"
           style={{ marginLeft: paddingLeft }}
         >
-          <p className="mb-2 truncate text-[11px] text-muted-foreground">
+          <p className="mb-2 truncate text-xs text-muted-foreground">
             Delete <span className="font-medium text-foreground">&ldquo;{displayName(node)}&rdquo;</span>?
           </p>
           <div className="flex gap-1.5">
             <button
-              className="flex-1 rounded-sm border border-destructive/30 bg-destructive/10 py-0.5 text-[10px] font-medium text-destructive transition-colors hover:bg-destructive/20"
+              className="flex-1 rounded-sm border border-destructive/30 bg-destructive/10 py-0.5 text-xs font-medium text-destructive transition-colors hover:bg-destructive/20"
               onMouseDown={(e) => {
                 e.preventDefault();
                 handleDelete();
@@ -397,7 +397,7 @@ export function FileTreeNode({
               Delete
             </button>
             <button
-              className="flex-1 rounded-sm border border-border py-0.5 text-[10px] text-muted-foreground transition-colors hover:bg-sidebar-accent"
+              className="flex-1 rounded-sm border border-border py-0.5 text-xs text-muted-foreground transition-colors hover:bg-sidebar-accent"
               onMouseDown={(e) => {
                 e.preventDefault();
                 setShowDelete(false);

@@ -26,8 +26,8 @@
   --dg-surface-section: var(--card);
   --dg-surface-default: var(--card);
   --dg-surface-strong: var(--muted);
-  /* Tree selection — Atlas sidebar tint */
-  --dg-tree-selected-bg: #efeff5;
+  /* Tree: hover uses --sidebar-accent (muted); selected lifts to the card */
+  --dg-tree-selected-bg: var(--card);
   --dg-tree-selected-fg: var(--foreground);
   /* Workspace card insets (Figma ChromeMain: pl-8 pr-12 py-12) */
   --dg-workspace-inset-top: 12px;
@@ -37,10 +37,10 @@
   --dg-workspace-radius: 16px;
   --dg-workspace-shadow: var(--shadow-sm);
   /* Tabs sit above the workspace card (Figma Digital Garden / TabBar) */
-  --dg-tabbar-height: 46px;
+  --dg-tabbar-height: 48px;
   --dg-tabbar-border: var(--border);
   --dg-tab-divider: var(--border);
-  --dg-tab-active-bg: var(--muted);
+  --dg-tab-active-bg: var(--card);
   --dg-tab-accent: var(--primary);
 }
 
@@ -51,7 +51,7 @@
   --dg-tree-selected-fg: var(--foreground);
   --dg-tabbar-border: var(--border);
   --dg-tab-divider: var(--border);
-  --dg-tab-active-bg: var(--muted);
+  --dg-tab-active-bg: var(--card);
   --dg-tab-accent: var(--primary);
 }
 
@@ -260,7 +260,7 @@
   flex: 0 0 var(--dg-ai-panel-width);
   width: var(--dg-ai-panel-width);
   border-left: 1px solid var(--dg-border-default);
-  background: var(--dg-surface-page);
+  background: var(--dg-surface-default);
 }
 
 .dg-panel-splitter {
@@ -376,9 +376,9 @@
   gap: 6px;
   border-right: 1px solid var(--dg-tab-divider);
   padding-inline: 8px;
-  font-size: 0.75rem;
+  font-size: var(--text-body);
   font-weight: 500;
-  line-height: 18px;
+  line-height: 1.5;
   color: var(--foreground);
   background: transparent;
   transition: background-color 0.12s ease, color 0.12s ease;

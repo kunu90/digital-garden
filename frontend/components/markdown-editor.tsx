@@ -25,7 +25,7 @@ import { TableToolbar } from "@/components/table-toolbar";
 const lightStructure = EditorView.theme({
   "&": {
     height: "100%",
-    fontSize: "15px",
+    fontSize: "1rem",
     fontFamily: "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
     backgroundColor: "transparent",
     color: "var(--foreground)",
@@ -39,13 +39,13 @@ const lightStructure = EditorView.theme({
   ".cm-line": { padding: "0" },
   ".cm-gutters": { display: "none" },
   ".cm-activeLineGutter": { backgroundColor: "transparent" },
-  ".cm-activeLine": { backgroundColor: "var(--muted)", borderRadius: "3px" },
+  ".cm-activeLine": { backgroundColor: "color-mix(in srgb, var(--foreground) 4%, transparent)", borderRadius: "3px" },
 });
 
 const darkStructure = EditorView.theme({
   "&": {
     height: "100%",
-    fontSize: "15px",
+    fontSize: "1rem",
     fontFamily: "var(--font-sans, ui-sans-serif, system-ui, sans-serif)",
     backgroundColor: "transparent",
     color: "var(--foreground)",
@@ -59,7 +59,7 @@ const darkStructure = EditorView.theme({
   ".cm-line": { padding: "0" },
   ".cm-gutters": { display: "none" },
   ".cm-activeLineGutter": { backgroundColor: "transparent" },
-  ".cm-activeLine": { backgroundColor: "var(--muted)", borderRadius: "3px" },
+  ".cm-activeLine": { backgroundColor: "color-mix(in srgb, var(--foreground) 4%, transparent)", borderRadius: "3px" },
 });
 
 // --- Syntax highlight styles (token colors) — Pajamas ---

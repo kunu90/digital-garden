@@ -323,15 +323,15 @@ export function CommandCenter({ open, onClose, onOpenFile }: CommandCenterProps)
                 {agenticLoading && <span className="cmd-section-loading"> thinking…</span>}
               </div>
               {!searchQuery.trim() && (
-                <p className="text-[11px] text-muted-foreground mt-2">
+                <p className="text-xs text-muted-foreground mt-2">
                   Type a question after <kbd className="cmd-esc-hint">?</kbd> e.g. ?Which notes mention machine learning?
                 </p>
               )}
               {searchQuery.trim().length > 0 && searchQuery.trim().length < 3 && (
-                <p className="text-[11px] text-muted-foreground mt-2">Type at least 3 characters…</p>
+                <p className="text-xs text-muted-foreground mt-2">Type at least 3 characters…</p>
               )}
               {agenticAnswer && (
-                <pre className="mt-2 text-[11px] whitespace-pre-wrap text-foreground leading-relaxed max-h-48 overflow-y-auto">
+                <pre className="mt-2 text-sm whitespace-pre-wrap text-foreground leading-relaxed max-h-48 overflow-y-auto">
                   {agenticAnswer}
                 </pre>
               )}

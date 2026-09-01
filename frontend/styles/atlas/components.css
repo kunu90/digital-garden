@@ -5,7 +5,7 @@
 
 :root {
   /* ── Chat panel ───────────────────────────────────────────── */
-  --chat-bg: var(--background);
+  --chat-bg: var(--card);
   --chat-header-bg: var(--card);
   --chat-header-text: var(--muted-foreground);
   --chat-border: var(--border);

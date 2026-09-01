@@ -36,7 +36,7 @@ const SHORTCUTS = [
 
 function Kbd({ children }: { children: ReactNode }) {
   return (
-    <kbd className="inline-flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--muted)] px-1.5 py-0.5 font-mono text-[11px] leading-none text-[var(--muted-foreground)]">
+    <kbd className="inline-flex items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--muted)] px-1.5 py-0.5 font-mono text-xs leading-none text-[var(--muted-foreground)]">
       {children}
     </kbd>
   );
@@ -59,7 +59,7 @@ function KeyboardShortcutsPopover() {
         <div className="space-y-4">
           {SHORTCUTS.map((group) => (
             <div key={group.section}>
-              <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wider text-muted-foreground/60">
+              <p className="mb-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">
                 {group.section}
               </p>
               <div className="space-y-1.5">
